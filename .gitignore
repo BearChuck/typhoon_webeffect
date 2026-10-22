@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+
+# 除了 README.md 以外，其餘 markdown 檔案均不上傳 GitHub
+*.md
+!README.md
