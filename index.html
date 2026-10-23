@@ -290,21 +290,89 @@
       }
     }
 
-    /* 快門截圖微互動 */
+    /* 快門截圖微互動 (高科技光圈旋轉、收縮、彈跳與閃光噴發) */
+    .btn-screenshot {
+      position: relative;
+      overflow: visible;
+    }
+
+    .btn-screenshot .cam-aperture {
+      transform-origin: 12px 13.5px;
+      transition: transform 0.4s var(--bounce-timing), stroke-dashoffset 0.4s ease;
+      stroke-dasharray: 25;
+      stroke-dashoffset: 0;
+    }
+
+    .btn-screenshot .cam-flash-dot {
+      fill: #ef4444;
+      stroke: none;
+      transition: fill 0.3s ease, filter 0.3s ease;
+    }
+
+    .btn-screenshot:hover .cam-aperture {
+      transform: rotate(45deg);
+      stroke: var(--color-primary);
+    }
+
+    .btn-screenshot:hover .cam-flash-dot {
+      filter: drop-shadow(0 0 5px #ef4444);
+    }
+
     .btn-screenshot.snapped {
-      animation: shutter-flash 0.5s ease-out;
+      animation: shutter-flash 0.6s var(--bounce-timing);
+    }
+
+    .btn-screenshot.snapped .cam-aperture {
+      animation: aperture-snap 0.6s var(--bounce-timing);
+    }
+
+    .btn-screenshot.snapped .cam-flash-dot {
+      fill: #ffffff;
+      filter: drop-shadow(0 0 10px #ffffff);
     }
 
     @keyframes shutter-flash {
       0% {
         background: #ffffff;
         color: #000;
-        box-shadow: 0 0 30px #ffffff;
+        box-shadow: 0 0 40px #ffffff, 0 0 20px var(--color-primary);
+        transform: scale(0.92);
+      }
+
+      40% {
+        background: rgba(0, 242, 254, 0.4);
+        color: #ffffff;
+        box-shadow: 0 0 30px var(--glow-cyan);
+        transform: scale(1.18);
       }
 
       100% {
         background: var(--bg-card);
         color: var(--color-primary);
+        box-shadow: 0 4px 15px var(--glow-cyan);
+        transform: scale(1);
+      }
+    }
+
+    @keyframes aperture-snap {
+      0% {
+        transform: rotate(0deg) scale(1);
+        stroke-dashoffset: 0;
+      }
+
+      35% {
+        transform: rotate(180deg) scale(0.35);
+        stroke-dashoffset: 18;
+      }
+
+      70% {
+        transform: rotate(380deg) scale(1.3);
+        stroke-dashoffset: -5;
+      }
+
+      100% {
+        transform: rotate(360deg) scale(1);
+        stroke-dashoffset: 0;
       }
     }
 
@@ -1393,6 +1461,373 @@
       transition: none;
     }
 
+    /* ==========================================================================
+       10. 截圖預覽與行動中心 (Screenshot Modal & HUD Toast)
+       ========================================================================== */
+    .screenshot-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .screenshot-modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .screenshot-modal-container {
+      width: 1000px;
+      max-width: 95vw;
+      max-height: 92vh;
+      background: rgba(10, 18, 38, 0.92);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--border-focus);
+      border-radius: 20px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 40px var(--glow-cyan);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.45s var(--bounce-timing), opacity 0.35s ease;
+    }
+
+    .screenshot-modal-backdrop.active .screenshot-modal-container {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(15, 27, 54, 0.5);
+    }
+
+    .modal-title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .modal-badge-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0, 242, 254, 0.12);
+      border: 1px solid var(--color-primary);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--glow-cyan);
+    }
+
+    .modal-title-group h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+
+    .modal-subtitle {
+      font-size: 12px;
+      color: var(--color-accent);
+      font-family: var(--font-mono);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .btn-close-modal {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+
+    .btn-close-modal:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--color-danger);
+      color: #ffffff;
+      transform: rotate(90deg);
+    }
+
+    .screenshot-tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(8, 14, 28, 0.6);
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .screenshot-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ss-tab {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s var(--bounce-timing);
+    }
+
+    .ss-tab:hover {
+      background: rgba(0, 242, 254, 0.1);
+      border-color: var(--border-focus);
+      color: var(--color-primary);
+    }
+
+    .ss-tab.active {
+      background: rgba(0, 242, 254, 0.2);
+      border-color: var(--color-primary);
+      color: #ffffff;
+      box-shadow: 0 0 12px var(--glow-cyan);
+    }
+
+    .screenshot-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+    }
+
+    .chip.chip-storm {
+      background: rgba(0, 242, 254, 0.12);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .chip.chip-route {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: var(--color-warning);
+      color: var(--color-warning);
+    }
+
+    .chip.chip-res {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: var(--color-emerald);
+      color: var(--color-emerald);
+    }
+
+    .screenshot-preview-box {
+      position: relative;
+      flex: 1;
+      min-height: 280px;
+      max-height: 54vh;
+      background: radial-gradient(circle at center, #0a1733 0%, #050a18 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .screenshot-preview-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid rgba(79, 172, 254, 0.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .screenshot-loading-spinner {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 10, 24, 0.85);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 10;
+    }
+
+    .screenshot-loading-spinner.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .radar-scan-spinner {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 242, 254, 0.2);
+      border-top-color: var(--color-primary);
+      animation: spin 0.8s linear infinite;
+      box-shadow: 0 0 15px var(--glow-cyan);
+    }
+
+    .screenshot-loading-spinner span {
+      font-size: 13px;
+      color: var(--color-primary);
+      font-family: var(--font-mono);
+      letter-spacing: 0.5px;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(15, 27, 54, 0.6);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      transition: all 0.25s var(--bounce-timing);
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--border-focus);
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .btn-action:active {
+      transform: translateY(1px) scale(0.97);
+    }
+
+    .btn-action.btn-copy.copied {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: var(--color-emerald);
+      color: #6ee7b7;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-action.btn-primary {
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.85) 0%, rgba(79, 172, 254, 0.85) 100%);
+      color: #030712;
+      border: none;
+      font-weight: 700;
+      box-shadow: 0 4px 18px var(--glow-cyan);
+    }
+
+    .btn-action.btn-primary:hover {
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      box-shadow: 0 6px 24px rgba(0, 242, 254, 0.6);
+      transform: translateY(-2px) scale(1.04);
+      color: #000000;
+    }
+
+    /* 浮動 HUD 提示 Toast */
+    .hud-toast {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      background: rgba(10, 20, 42, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--color-primary);
+      border-radius: 14px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px var(--glow-cyan);
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.4s var(--bounce-timing), opacity 0.3s ease;
+    }
+
+    .hud-toast.active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hud-toast-icon {
+      font-size: 22px;
+    }
+
+    .hud-toast-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hud-toast-content strong {
+      font-size: 13px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .hud-toast-content span {
+      font-size: 11px;
+      color: var(--color-primary);
+      font-family: var(--font-mono);
+    }
+
     /* 響應式適配 */
     @media (max-width: 1200px) {
       main.workbench-container {
@@ -1479,10 +1914,16 @@
       </button>
 
       <!-- 截圖匯出 (微互動 Aperture + Flash + Chord Sound) -->
-      <button class="btn-icon btn-screenshot" id="btnScreenshot" title="擷取當前動力學視窗畫面" aria-label="截圖匯出">
-        <svg viewBox="0 0 24 24">
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-          <circle cx="12" cy="13" r="4" />
+      <button class="btn-icon btn-screenshot" id="btnScreenshot" title="擷取當前動力學視窗畫面 (快速鍵: S)" aria-label="截圖匯出">
+        <svg viewBox="0 0 24 24" id="camSvg">
+          <!-- 相機外框與頂部快門凸起 -->
+          <path class="cam-body" d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+          <!-- 鏡頭外圈 -->
+          <circle class="cam-lens" cx="12" cy="13.5" r="4.5" />
+          <!-- 光圈快門機械葉片 (具備旋轉收縮與描邊微動效) -->
+          <path class="cam-aperture" d="M12 9 v4.5 M15.5 12 l-3.5 1.5 M15 15.5 l-3 -2 M10 16.5 l2 -3 M8.5 13.5 l3.5 -0.5 M9.5 10.5 l2.5 3" />
+          <!-- 閃光指示紅點 -->
+          <circle class="cam-flash-dot" cx="19" cy="9.5" r="1.5" />
         </svg>
       </button>
     </div>
@@ -2105,6 +2546,97 @@
     </footer>
   </main>
 
+  <!-- 截圖預覽與行動中心 Modal -->
+  <div class="screenshot-modal-backdrop" id="screenshotModalBackdrop" aria-hidden="true">
+    <div class="screenshot-modal-container" id="screenshotModal">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-badge-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <div>
+            <h3>動力學視窗畫面擷取完成</h3>
+            <span class="modal-subtitle" id="screenshotMetaSubtitle">1800 × 1350 高解析度氣象觀測影像 (PNG)</span>
+          </div>
+        </div>
+        <button class="btn-close-modal" id="btnCloseScreenshotModal" aria-label="關閉視窗">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 視角切換標籤 (可在預覽窗內即時重新輸出不同視角) -->
+      <div class="screenshot-tabs-row">
+        <div class="screenshot-tabs">
+          <button class="ss-tab active" data-mode="auto" id="tabModeAuto">當前畫面</button>
+          <button class="ss-tab" data-mode="2d" id="tabMode2D">2D 雷達圖</button>
+          <button class="ss-tab" data-mode="3d" id="tabMode3D">3D 等角投影</button>
+          <button class="ss-tab" data-mode="cross" id="tabModeCross">東西垂直剖面</button>
+        </div>
+        <div class="screenshot-chips" id="screenshotChips">
+          <span class="chip chip-storm" id="ssChipStorm">凱米 GAEMI</span>
+          <span class="chip chip-route" id="ssChipRoute">第1類 西北颱</span>
+          <span class="chip chip-res">2K Retina</span>
+        </div>
+      </div>
+
+      <!-- 圖片預覽畫布容器 -->
+      <div class="screenshot-preview-box">
+        <img id="screenshotPreviewImg" alt="擷取畫面預覽" class="screenshot-preview-img" />
+        <div class="screenshot-loading-spinner" id="screenshotSpinner">
+          <div class="radar-scan-spinner"></div>
+          <span>高解析度圖層渲染中...</span>
+        </div>
+      </div>
+
+      <!-- 底部操作按鈕欄 -->
+      <div class="modal-footer">
+        <div class="footer-hint">
+          <span>⚡ 影像已嵌入遙測數據、路徑軌跡與氣象警戒水印</span>
+        </div>
+        <div class="footer-actions">
+          <button class="btn-action btn-copy" id="btnCopyScreenshot">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="btnCopyText">複製至剪貼簿</span>
+          </button>
+          <button class="btn-action btn-svg" id="btnDownloadSvg" title="下載純 SVG 向量代碼">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span>另存向量 SVG</span>
+          </button>
+          <button class="btn-action btn-primary btn-download" id="btnDownloadScreenshot">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>下載 PNG 影像</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 浮動 HUD 提示 Toast -->
+  <div class="hud-toast" id="hudToast" aria-live="polite">
+    <div class="hud-toast-icon">📸</div>
+    <div class="hud-toast-content">
+      <strong id="hudToastTitle">動力學畫面已成功擷取</strong>
+      <span id="hudToastDesc">已生成 1800×1350 高解析度觀測影像</span>
+    </div>
+  </div>
+
   <!-- ==========================================================================
        11. 原生 Web Audio API 聲音合成引擎 (零外置音檔，零延遲)
        ========================================================================== -->
@@ -2699,20 +3231,528 @@
       }
     });
 
-    // 截圖閃光效果與回饋
+    // ==========================================================================
+    // 8. 截圖引擎 (SVG 向量光柵化、高解析度 2K 氣象觀測影像合成與匯出)
+    // ==========================================================================
+    let currentScreenshotBlob = null;
+    let currentScreenshotDataUrl = null;
+    let currentScreenshotSvg = null;
+    let currentScreenshotFilename = 'TYPHOON-TW_GAEMI.png';
+    let currentScreenshotMode = 'auto';
+
+    // 截圖預覽 DOM 元素
+    const screenshotModalBackdrop = document.getElementById('screenshotModalBackdrop');
+    const screenshotModal = document.getElementById('screenshotModal');
+    const btnCloseScreenshotModal = document.getElementById('btnCloseScreenshotModal');
+    const screenshotPreviewImg = document.getElementById('screenshotPreviewImg');
+    const screenshotSpinner = document.getElementById('screenshotSpinner');
+    const screenshotMetaSubtitle = document.getElementById('screenshotMetaSubtitle');
+    const ssChipStorm = document.getElementById('ssChipStorm');
+    const ssChipRoute = document.getElementById('ssChipRoute');
+    const btnCopyScreenshot = document.getElementById('btnCopyScreenshot');
+    const btnCopyText = document.getElementById('btnCopyText');
+    const btnDownloadSvg = document.getElementById('btnDownloadSvg');
+    const btnDownloadScreenshot = document.getElementById('btnDownloadScreenshot');
+    const hudToast = document.getElementById('hudToast');
+    const hudToastTitle = document.getElementById('hudToastTitle');
+    const hudToastDesc = document.getElementById('hudToastDesc');
+    let toastTimeout = null;
+
+    function showHudToast(title, desc, duration = 3200) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      hudToastTitle.textContent = title;
+      hudToastDesc.textContent = desc;
+      hudToast.classList.add('active');
+      toastTimeout = setTimeout(() => {
+        hudToast.classList.remove('active');
+      }, duration);
+    }
+
+    // 氣象動力學截圖合成核心
+    async function captureDynamicsScreenshot(targetMode = 'auto') {
+      currentScreenshotMode = targetMode;
+      const isCrossOpen = crossModal.classList.contains('active');
+      const effectiveMode = (targetMode === 'auto')
+        ? (isCrossOpen ? 'cross' : (scene3D.classList.contains('view-2d') ? '2d' : '3d'))
+        : targetMode;
+
+      // 提取即時氣象數值
+      const stormName = stormNameEl?.innerText.trim() || '凱米 (GAEMI)';
+      const pressure = telemetryPressureEl?.innerText.trim() || '955 hPa';
+      const maxWind = telemetryWindEl?.innerText.trim() || '48 m/s';
+      const rain = telemetryRainEl?.innerText.trim() || '1,240 mm/24h';
+      const motion = telemetryMotionEl?.innerText.trim() || '19 km/h 西北';
+      const routeData = (typeof TYPHOON_ROUTES !== 'undefined' && TYPHOON_ROUTES[currentRouteId])
+        ? TYPHOON_ROUTES[currentRouteId]
+        : { name: '第1類 西北颱' };
+      const principleName = document.querySelector('.p-card.active h3')?.innerText.trim() || '迎風面地形雨';
+      const alertBadge = document.getElementById('threatTag')?.innerText.trim() || '超大豪雨特報';
+      const stageText = timelineStageLabel?.innerText.trim() || '模擬進程';
+
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+      const timeStampFull = `${dateStr} ${timeStr} CST`;
+
+      let canvas, ctx, W, H, filename, svgSource;
+
+      if (effectiveMode === 'cross') {
+        // --- 剖面圖模式 ---
+        W = 1800;
+        H = 1050;
+        filename = `TYPHOON-TW_CrossSection_Profile_${dateStr}.png`;
+        canvas = document.createElement('canvas');
+        canvas.width = W;
+        canvas.height = H;
+        ctx = canvas.getContext('2d');
+
+        // 背景
+        const bgGrad = ctx.createRadialGradient(W / 2, H / 2, 80, W / 2, H / 2, W);
+        bgGrad.addColorStop(0, '#0d1a38');
+        bgGrad.addColorStop(1, '#050a18');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, W, H);
+
+        // 經緯雷達網格
+        ctx.strokeStyle = 'rgba(79, 172, 254, 0.08)';
+        ctx.lineWidth = 1;
+        for (let x = 60; x < W; x += 60) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+        }
+        for (let y = 60; y < H; y += 60) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        }
+
+        // 複製剖面圖 SVG
+        const crossSvg = document.getElementById('crossSvg');
+        const crossClone = crossSvg.cloneNode(true);
+        crossClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        crossClone.setAttribute('width', '800');
+        crossClone.setAttribute('height', '320');
+        svgSource = new XMLSerializer().serializeToString(crossClone);
+
+        const img = await new Promise((resolve, reject) => {
+          const blob = new Blob([svgSource], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const i = new Image();
+          i.onload = () => { URL.revokeObjectURL(url); resolve(i); };
+          i.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+          i.src = url;
+        });
+
+        // 頂部抬頭
+        ctx.fillStyle = 'rgba(13, 22, 41, 0.92)';
+        ctx.fillRect(40, 30, W - 80, 80);
+        ctx.strokeStyle = 'rgba(79, 172, 254, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(40, 30, W - 80, 80);
+
+        ctx.fillStyle = '#00f2fe';
+        ctx.font = 'bold 24px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+        ctx.fillText('台灣東西向地形垂直大氣剖面圖 // E-W Atmospheric Profile', 65, 68);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '13px -apple-system, BlinkMacSystemFont, "JetBrains Mono", sans-serif';
+        ctx.fillText('23.5°N 北回歸線剖面 • 迎風面濕絕熱抬升凝結 (0.65℃/100m) 與背風面乾絕熱沉降焚風 (1.0℃/100m)', 65, 94);
+
+        ctx.fillStyle = '#00f2fe';
+        ctx.font = 'bold 15px -apple-system, BlinkMacSystemFont, "JetBrains Mono", monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText('VERTICAL PROFILE // HIGH-RES EXPORT', W - 65, 66);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '13px -apple-system, BlinkMacSystemFont, "JetBrains Mono", monospace';
+        ctx.fillText(timeStampFull, W - 65, 92);
+        ctx.textAlign = 'left';
+
+        // 繪製剖面圖
+        const pW = 1600;
+        const pH = 640;
+        const pX = (W - pW) / 2;
+        const pY = 145;
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 242, 254, 0.25)';
+        ctx.shadowBlur = 30;
+        ctx.drawImage(img, pX, pY, pW, pH);
+        ctx.restore();
+
+        // 底部說明卡
+        const botY = H - 220;
+        ctx.fillStyle = 'rgba(13, 22, 41, 0.92)';
+        ctx.fillRect(40, botY, W - 80, 170);
+        ctx.strokeStyle = 'rgba(79, 172, 254, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(40, botY, W - 80, 170);
+
+        // 雙欄原理解析
+        const colW = (W - 120) / 2;
+        // 左欄
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = 'bold 16px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+        ctx.fillText('【東坡迎風面】地形雨核心機制 (Orographic Precipitation)', 65, botY + 38);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '13px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+        ctx.fillText('熱帶太平洋暖濕水氣受中央山脈阻擋，被迫沿坡面抬升。高度每上升100公尺氣溫約降0.65℃，水氣飽和凝結成雲降雨。', 65, botY + 68);
+        ctx.fillText('形成宜蘭、花蓮、高屏山區破紀錄之超大豪雨（日雨量常超越1,000毫米）。', 65, botY + 92);
+
+        // 右欄
+        ctx.fillStyle = '#ff4500';
+        ctx.font = 'bold 16px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+        ctx.fillText('【西坡背風面】沉降焚風形成原理 (Foehn Wind)', 65 + colW, botY + 38);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fillText('空氣失去大量水分越過中央山脈主脊後，沿背風坡迅速下沉，依乾絕熱遞減率增溫（每百公尺升1.0℃）。', 65 + colW, botY + 68);
+        ctx.fillText('空氣抵達平地時氣溫急劇飆升（台東/大武曾達40.2℃極端高溫），相對濕度劇降至30%以下形成乾熱風暴。', 65 + colW, botY + 92);
+
+        // 狀態行
+        ctx.fillStyle = '#64748b';
+        ctx.font = '12px -apple-system, BlinkMacSystemFont, "JetBrains Mono", sans-serif';
+        ctx.fillText(`TYPHOON-TW SCIENTIFIC REPORT • ${stormName} • ${stageText}`, 65, botY + 140);
+        ctx.fillStyle = '#f59e0b';
+        ctx.textAlign = 'right';
+        ctx.fillText(`● 觀測狀態：玉山主峰 3952m 氣象站觀測中 • ${alertBadge}`, W - 65, botY + 140);
+        ctx.textAlign = 'left';
+
+      } else {
+        // --- 主動態地圖模式 (2D / 3D) ---
+        W = 1800;
+        H = 1350;
+        filename = `TYPHOON-TW_${stormName.replace(/\s+/g, '_')}_Route${currentRouteId}_${dateStr}.png`;
+        canvas = document.createElement('canvas');
+        canvas.width = W;
+        canvas.height = H;
+        ctx = canvas.getContext('2d');
+
+        // 背景
+        const bgGrad = ctx.createRadialGradient(W / 2, H / 2, 120, W / 2, H / 2, W / 1.1);
+        bgGrad.addColorStop(0, '#091530');
+        bgGrad.addColorStop(1, '#040814');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, W, H);
+
+        // 經緯十字刻度網格
+        ctx.strokeStyle = 'rgba(79, 172, 254, 0.08)';
+        ctx.lineWidth = 1;
+        for (let x = 60; x < W; x += 60) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+        }
+        for (let y = 60; y < H; y += 60) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        }
+
+        // 複製主地圖 SVG
+        const svgMap = document.getElementById('svgMap');
+        const mapClone = svgMap.cloneNode(true);
+        mapClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        mapClone.setAttribute('width', '900');
+        mapClone.setAttribute('height', '900');
+
+        // 注入專屬 SVG 渲染樣式（避開外部字型 deadlock）
+        const styleEl = document.createElement('style');
+        styleEl.textContent = `
+          .taiwan-base-land { fill: #0c1a34; stroke: #1e3a6a; stroke-width: 1.5; }
+          .contour-500m { fill: #13274d; stroke: #264d8a; stroke-width: 1; }
+          .contour-1500m { fill: #1a366b; stroke: #3b82f6; stroke-width: 1.2; }
+          .contour-2500m-spine { fill: #22488a; stroke: #60a5fa; stroke-width: 1.5; }
+          .penghu-islands { fill: #0f2244; stroke: #1e3a6a; }
+          .station-dot { fill: #00f2fe; stroke: #ffffff; stroke-width: 1; }
+          .station-label { font-family: -apple-system, sans-serif; font-size: 10px; font-weight: 700; fill: #cbd5e1; }
+          .typhoon-eye { fill: #060d1d; stroke: #00f2fe; stroke-width: 2; }
+          .storm-radius-gale { fill: rgba(0, 242, 254, 0.08); stroke: rgba(0, 242, 254, 0.6); stroke-width: 1.5; stroke-dasharray: 6 4; }
+          .storm-radius-destructive { fill: rgba(239, 68, 68, 0.15); stroke: rgba(239, 68, 68, 0.7); stroke-width: 1.5; stroke-dasharray: 4 3; }
+          .spiral-outer { stroke: url(#rainband-cyan-grad); stroke-width: 5; opacity: 0.85; }
+          .spiral-inner { stroke: url(#rainband-warning-grad); stroke-width: 7; opacity: 0.95; }
+          .spiral-eyewall { stroke: url(#rainband-danger-grad); stroke-width: 8; opacity: 1; }
+          .track-active-path { fill: none; stroke: url(#track-glow-grad); stroke-width: 3.5; stroke-linecap: round; }
+          .wind-vector-stream { fill: none; stroke: rgba(147, 197, 253, 0.45); stroke-width: 2; stroke-dasharray: 8 8; }
+        `;
+        mapClone.insertBefore(styleEl, mapClone.firstChild);
+        svgSource = new XMLSerializer().serializeToString(mapClone);
+
+        const img = await new Promise((resolve, reject) => {
+          const blob = new Blob([svgSource], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const i = new Image();
+          i.onload = () => { URL.revokeObjectURL(url); resolve(i); };
+          i.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+          i.src = url;
+        });
+
+        // 繪製地圖主體 (支援 3D Isometric 與 2D 高解析雷達)
+        if (effectiveMode === '3d') {
+          // 3D 等角投影視角
+          ctx.save();
+          ctx.translate(W / 2, 600);
+          ctx.scale(1, Math.cos(55 * Math.PI / 180));
+          ctx.rotate(-30 * Math.PI / 180);
+          ctx.scale(0.9, 0.9);
+          ctx.shadowColor = 'rgba(0, 242, 254, 0.3)';
+          ctx.shadowBlur = 40;
+          ctx.drawImage(img, -450, -450, 900, 900);
+          ctx.restore();
+        } else {
+          // 2D 平面高清視角
+          const stageSize = 980;
+          const stageX = (W - stageSize) / 2;
+          const stageY = 135;
+          ctx.save();
+          ctx.shadowColor = 'rgba(0, 242, 254, 0.25)';
+          ctx.shadowBlur = 35;
+          ctx.drawImage(img, stageX, stageY, stageSize, stageSize);
+          ctx.restore();
+        }
+
+        // 頂部 HUD 標題卡
+        ctx.fillStyle = 'rgba(13, 22, 41, 0.9)';
+        ctx.fillRect(40, 30, W - 80, 80);
+        ctx.strokeStyle = 'rgba(79, 172, 254, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(40, 30, W - 80, 80);
+
+        ctx.fillStyle = '#00f2fe';
+        ctx.font = 'bold 24px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+        ctx.fillText('TYPHOON-TW // 颱風台灣影響動力學視覺化分析', 65, 68);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '13px -apple-system, BlinkMacSystemFont, "JetBrains Mono", sans-serif';
+        ctx.fillText(`CWB / JMA METEOROLOGICAL VECTOR DYNAMICS WORKBENCH • ${effectiveMode === '3d' ? '3D ISOMETRIC VIEW' : '2D RADAR VIEW'}`, 65, 94);
+
+        ctx.fillStyle = '#00f2fe';
+        ctx.font = 'bold 15px -apple-system, BlinkMacSystemFont, "JetBrains Mono", monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText('STATUS: SIMULATION ACTIVE // 60 FPS', W - 65, 66);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '13px -apple-system, BlinkMacSystemFont, "JetBrains Mono", monospace';
+        ctx.fillText(timeStampFull, W - 65, 92);
+        ctx.textAlign = 'left';
+
+        // 底部遙測數據帶
+        const bottomY = H - 190;
+        ctx.fillStyle = 'rgba(13, 22, 41, 0.92)';
+        ctx.fillRect(40, bottomY, W - 80, 150);
+        ctx.strokeStyle = 'rgba(79, 172, 254, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(40, bottomY, W - 80, 150);
+
+        const items = [
+          { label: '颱風狀態', val: stormName, color: '#00f2fe' },
+          { label: '中心氣壓', val: pressure, color: '#f1f5f9' },
+          { label: '最大陣風', val: maxWind, color: '#f1f5f9' },
+          { label: '豪雨極值', val: rain, color: '#ef4444' },
+          { label: '移速/走向', val: motion, color: '#f1f5f9' },
+          { label: '侵台路徑', val: routeData.name || '第1類 西北颱', color: '#38bdf8' }
+        ];
+
+        const colWidth = (W - 140) / items.length;
+        items.forEach((item, idx) => {
+          const x = 70 + idx * colWidth;
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '13px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+          ctx.fillText(item.label, x, bottomY + 38);
+
+          ctx.fillStyle = item.color;
+          ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, "JetBrains Mono", sans-serif';
+          ctx.fillText(item.val, x, bottomY + 70);
+        });
+
+        // 遙測卡中線
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.beginPath();
+        ctx.moveTo(60, bottomY + 95);
+        ctx.lineTo(W - 60, bottomY + 95);
+        ctx.stroke();
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = 'bold 14px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+        ctx.fillText(`氣象動力學原理：${principleName} | ${stageText}`, 70, bottomY + 128);
+
+        ctx.fillStyle = '#f59e0b';
+        ctx.textAlign = 'right';
+        ctx.fillText(`● 警戒特報：${alertBadge}`, W - 70, bottomY + 128);
+        ctx.textAlign = 'left';
+      }
+
+      // 視窗四角軍規準星標記 (Corner Reticles)
+      const bracketSize = 25;
+      ctx.strokeStyle = '#00f2fe';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(25, 25 + bracketSize); ctx.lineTo(25, 25); ctx.lineTo(25 + bracketSize, 25); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W - 25 - bracketSize, 25); ctx.lineTo(W - 25, 25); ctx.lineTo(W - 25, 25 + bracketSize); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(25, H - 25 - bracketSize); ctx.lineTo(25, H - 25); ctx.lineTo(25 + bracketSize, H - 25); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W - 25 - bracketSize, H - 25); ctx.lineTo(W - 25, H - 25); ctx.lineTo(W - 25, H - 25 - bracketSize); ctx.stroke();
+
+      // 產生 Blob 與 DataURL
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+      const dataUrl = canvas.toDataURL('image/png');
+
+      currentScreenshotBlob = blob;
+      currentScreenshotDataUrl = dataUrl;
+      currentScreenshotSvg = svgSource;
+      currentScreenshotFilename = filename;
+
+      return {
+        canvas,
+        blob,
+        dataUrl,
+        filename,
+        svgSource,
+        width: W,
+        height: H,
+        mode: effectiveMode
+      };
+    }
+
+    // 顯示截圖預覽行動視窗
+    function openScreenshotModal(result) {
+      screenshotPreviewImg.src = result.dataUrl;
+      screenshotMetaSubtitle.textContent = `${result.width} × ${result.height} 高解析度氣象觀測影像 (PNG)`;
+      ssChipStorm.textContent = stormNameEl?.innerText.trim() || '凱米 GAEMI';
+      ssChipRoute.textContent = TYPHOON_ROUTES[currentRouteId]?.name || '典型路徑';
+
+      // 標籤樣式高亮
+      document.querySelectorAll('.ss-tab').forEach(tab => {
+        if (tab.getAttribute('data-mode') === currentScreenshotMode) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+
+      screenshotModalBackdrop.classList.add('active');
+      btnCopyText.textContent = '複製至剪貼簿';
+      btnCopyScreenshot.classList.remove('copied');
+
+      audioEngine.playChord();
+      showHudToast('📸 畫面已成功擷取！', `${result.width}×${result.height} PNG 影像已就緒，可直接下載或複製`);
+    }
+
+    // 關閉截圖預覽視窗
+    function closeScreenshotModal() {
+      screenshotModalBackdrop.classList.remove('active');
+      audioEngine.playClick();
+    }
+
+    btnCloseScreenshotModal.addEventListener('click', closeScreenshotModal);
+    screenshotModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === screenshotModalBackdrop) {
+        closeScreenshotModal();
+      }
+    });
+
+    // 視角切換重新輸出標籤
+    document.querySelectorAll('.ss-tab').forEach(tab => {
+      tab.addEventListener('click', async () => {
+        audioEngine.playClick();
+        const mode = tab.getAttribute('data-mode');
+        document.querySelectorAll('.ss-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        screenshotSpinner.classList.add('active');
+        try {
+          const res = await captureDynamicsScreenshot(mode);
+          screenshotPreviewImg.src = res.dataUrl;
+          screenshotMetaSubtitle.textContent = `${res.width} × ${res.height} 高解析度氣象觀測影像 (PNG)`;
+        } catch (err) {
+          console.error('重新切換視角失敗', err);
+        } finally {
+          screenshotSpinner.classList.remove('active');
+        }
+      });
+    });
+
+    // 複製圖片至剪貼簿
+    btnCopyScreenshot.addEventListener('click', async () => {
+      if (!currentScreenshotBlob) return;
+      audioEngine.playSnap();
+      try {
+        if (navigator.clipboard && typeof ClipboardItem !== 'undefined') {
+          await navigator.clipboard.write([
+            new ClipboardItem({ 'image/png': currentScreenshotBlob })
+          ]);
+          btnCopyText.textContent = '✅ 已複製至剪貼簿！';
+          btnCopyScreenshot.classList.add('copied');
+          audioEngine.playChord();
+          showHudToast('📋 複製成功', 'PNG 影像已存入系統剪貼簿，可直接於通訊軟體或簡報貼上 (Ctrl+V)');
+          setTimeout(() => {
+            btnCopyText.textContent = '複製至剪貼簿';
+            btnCopyScreenshot.classList.remove('copied');
+          }, 3000);
+        } else {
+          throw new Error('Clipboard API not supported');
+        }
+      } catch (err) {
+        console.warn('Clipboard write failed, fallbacking to direct download', err);
+        showHudToast('⚠️ 剪貼簿存取受限', '瀏覽器限制權限，改為自動下載影像檔案');
+        btnDownloadScreenshot.click();
+      }
+    });
+
+    // 下載 PNG 影像
+    btnDownloadScreenshot.addEventListener('click', () => {
+      if (!currentScreenshotDataUrl) return;
+      audioEngine.playSnap();
+      const a = document.createElement('a');
+      a.href = currentScreenshotDataUrl;
+      a.download = currentScreenshotFilename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showHudToast('💾 下載完成', `已儲存 ${currentScreenshotFilename}`);
+    });
+
+    // 下載純 SVG 向量檔
+    btnDownloadSvg.addEventListener('click', () => {
+      if (!currentScreenshotSvg) return;
+      audioEngine.playSnap();
+      const blob = new Blob([currentScreenshotSvg], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = currentScreenshotFilename.replace('.png', '.svg');
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showHudToast('🔗 向量檔已匯出', '純 SVG 格式已下載，可使用 Illustrator / Figma 開啟編輯');
+    });
+
+    // 截圖按鈕點擊觸發 (快門微動效 + 閃光音訊 + 高畫質截圖)
     const btnScreenshot = document.getElementById('btnScreenshot');
-    btnScreenshot.addEventListener('click', () => {
+    btnScreenshot.addEventListener('click', async () => {
+      // 1. 即刻啟動快門音效與微動效
       audioEngine.playShutter();
       btnScreenshot.classList.add('snapped');
       flashOverlay.classList.add('active');
 
       setTimeout(() => {
         flashOverlay.classList.remove('active');
-      }, 100);
+      }, 120);
 
       setTimeout(() => {
         btnScreenshot.classList.remove('snapped');
-      }, 600);
+      }, 650);
+
+      // 2. 執行高畫質氣象截圖生成
+      try {
+        const result = await captureDynamicsScreenshot('auto');
+        openScreenshotModal(result);
+      } catch (err) {
+        console.error('截圖生成失敗', err);
+        showHudToast('❌ 截圖生成失敗', err.message || '請重試');
+      }
+    });
+
+    // 全域鍵盤快捷鍵：按 S 截圖，按 ESC 關閉 Modal
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        btnScreenshot.click();
+      } else if (e.key === 'Escape') {
+        if (screenshotModalBackdrop.classList.contains('active')) {
+          closeScreenshotModal();
+        } else if (crossModal.classList.contains('active')) {
+          toggleCrossSectionModal(false);
+        }
+      }
     });
 
     // 音效開關切換
