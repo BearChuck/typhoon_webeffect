@@ -46,12 +46,32 @@
    - 採用 SVG `stroke-dasharray` 與 `stroke-dashoffset` 實現螺旋雨帶流動吸入與打勾筆劃過渡。
    - 原生 **Web Audio API** 即時純代碼振盪合成音效（Click 40ms、Snap 60ms、Chord 和弦、Shutter 快門音），0KB 容量、零載入延遲、連續點擊不截斷。
 
-4. **科研級動態截圖與發布引擎（Scientific Dynamic HUD Export）**：
-   - **2K 超高解析向量複合渲染**：支援 1800×1350 (4:3) 與 1800×1050 氣象遙測級影像輸出，疊加 CWB/JMA 風格頂部資訊條、雷達座標網格、四角準星 `[ ]` 與底部即時動力學遙測數據條（強度、氣壓、暴風半徑、累積雨量、移速與路徑）。
-   - **四種視圖捕捉模式**：自動偵測目前作用中視窗（Auto）、2D 平面雷達圖（2D Radar）、3D 空間等角透視投影（3D Isometric）、東西向垂直剖面圖（Vertical Cross-Section）。
+4. **科研級動態截圖與分析結論圖片匯出引擎（Scientific Dynamic HUD Export）**：
+   - **一鍵下載 2K 氣象動力學分析結論圖**：點擊相機快門按鈕直接生成並下載 **2000×1260** 超高解析度科研級「分析結論報告卡」，整合中央山脈地形破壞、迎風面強迫抬升豪雨、背風面沉降焚風、全台各分區威脅度與防災避險關鍵指引。
+   - **多重視圖捕捉模式**：支援氣象分析結論圖（Conclusion）、當前視窗（Auto）、2D 向量雷達圖（2D Radar）、3D 空間等角透視（3D Isometric）與東西向垂直剖面圖（Vertical Profile）。
    - **零依賴原生安全管線**：採純原生 Canvas 2D + SVG 深度複製與樣式內嵌，徹底杜絕 `foreignObject` 跨網域字型污染（Tainted Canvas）導致的匯出失敗。
-   - **一鍵下載與原生剪貼簿支援**：提供 2K PNG 高解析下載、原始 SVG 向量下載，並支援現代非同步 `ClipboardItem` API，一鍵複製影像直貼 Keynote / PowerPoint / 通訊軟體。
-   - **機械快門微互動**：相機 6 葉片光圈收縮動畫、電子雙幕閃光（`shutter-flash`）、Web Audio 原生合成雙頻快門聲，並支援全域快速鍵（`S` 立即截圖、`Esc` 關閉視窗）。
+   - **雙重極速發布工作流**：支援自動觸發瀏覽器下載、高解析 PNG / 向量 SVG 另存，並支援現代非同步 `ClipboardItem` API 一鍵複製影像直貼 Keynote / PowerPoint / 通訊軟體。
+   - **機械快門微互動**：相機 6 葉片光圈收縮動畫、電子雙幕閃光（`shutter-flash`）、Web Audio 原生合成雙頻快門聲，並支援全域快速鍵（`S` 立即截圖並下載結論、`Esc` 關閉視窗）。
+
+5. **真實氣象物理與大氣渦旋動力（Meteorological Vortex Physics）**：
+   - **北半球逆時針渦旋（Counter-Clockwise Swirl）**：嚴格依循北半球地轉偏向力（科氏力，Coriolis Effect），低壓中心環流與 7/10 級暴風半徑全面採用逆時針旋轉（CCW）。
+   - **向心內流螺旋雨帶（Inward Convergence Flow）**：螺旋雨帶採用向心方向之 `stroke-dashoffset` 循環流動動畫，真實重現熱帶氣旋底層水氣輻合捲入颱風眼之動態過程。
+
+---
+
+## 🛰️ 線上颱風資料庫直接引用指引 (Online Typhoon Databases)
+
+本視覺化工作台採用純前端向量結構與開放資料架構，可直接透過 JavaScript `fetch()` 介接以下權威線上颱風資料庫：
+
+| 資料庫 / 平台 | 單位 | 存取協定與格式 | 適用場景與資料欄位 |
+| :--- | :--- | :--- | :--- |
+| **[CWA 氣象署開放資料平台](https://opendata.cwa.gov.tw/)** | 台灣中央氣象署 | REST API (JSON / XML)<br>代碼：`W-C0034-001` | 即時警報、颱風中心經緯度、氣壓、近中心最大風速、7級/10級暴風半徑、預報路徑。 |
+| **[CWA 暴風圈侵襲機率 API](https://opendata.cwa.gov.tw/)** | 台灣中央氣象署 | REST API (JSON)<br>代碼：`W-C0034-002` | 全台各縣市未來 120 小時之 7 級風暴風圈侵襲機率百分比。 |
+| **[CWA 歷史颱風資料庫](https://rdc28.cwa.gov.tw/TDB/)** | 台灣中央氣象署 | Web / CSV 下載 | 1958 年至今所有侵台颱風路徑分類（1~10 類）、逐時雨量與測站極端風速。 |
+| **[NCDR 災害示警平台](https://alerts.ncdr.nat.gov.tw/)** | 國家災害防救科技中心 | Open Data / CAP / GeoJSON | 即時颱風警戒區 Polygon、豪雨特報、風雨防救災應變資訊。 |
+| **[JMA RSMC Tokyo Best Track](https://www.jma.go.jp/jma/jma-eng/jma-center/rsmc-hp-pub-eg/besttrack.html)** | 日本氣象廳 (WMO 指定) | CSV / Text Format | 西北太平洋官方歷史颱風最佳路徑（每 6 小時中心位置、氣壓、強度）。 |
+| **[NOAA IBTrACS](https://www.ncei.noaa.gov/products/international-best-track-archive)** | 美國國家海洋暨大氣總署 | REST API / GeoJSON / CSV | 全球熱帶氣旋最佳追蹤資料庫，提供即時與歷史氣旋完整軌跡與物理強度。 |
+| **[Open-Meteo Weather API](https://open-meteo.com/)** | Open-Meteo | REST API (免金鑰 / 開放 CORS) | 透過純前端輸入經緯度即可獲取海平面氣壓、風速、陣風，零延遲介接即時風場。 |
 
 ---
 
