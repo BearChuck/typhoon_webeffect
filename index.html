@@ -2164,6 +2164,226 @@
       border-radius: 14px;
     }
 
+    /* CWA 歷史最佳路徑資料庫搜尋與多維度篩選工具列 */
+    .cwa-filter-toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(5, 12, 28, 0.7);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 14px;
+      padding: 14px 18px;
+    }
+
+    .cwa-search-box {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .cwa-search-box .search-icon {
+      position: absolute;
+      left: 12px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .cwa-search-input {
+      width: 100%;
+      background: rgba(4, 9, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 9px 36px 9px 36px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.25s var(--bounce-timing);
+    }
+
+    .cwa-search-input:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 12px var(--glow-cyan);
+      background: rgba(8, 16, 36, 0.95);
+    }
+
+    .cwa-search-clear {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+
+    .cwa-search-clear:hover {
+      color: var(--color-danger);
+    }
+
+    .cwa-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cwa-select {
+      background: rgba(8, 17, 36, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--text-main);
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cwa-select:focus, .cwa-select:hover {
+      border-color: var(--color-primary);
+      color: #ffffff;
+    }
+
+    .cwa-select option {
+      background: #091326;
+      color: #ffffff;
+    }
+
+    .cwa-view-toggle {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-left: auto;
+    }
+
+    .cwa-toggle-btn {
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .cwa-toggle-btn:hover {
+      color: var(--color-primary);
+    }
+
+    .cwa-toggle-btn.active {
+      background: rgba(0, 242, 254, 0.2);
+      color: #ffffff;
+    }
+
+    .cwa-btn-reset {
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-dim);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cwa-btn-reset:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--color-danger);
+      color: #fca5a5;
+    }
+
+    .cwa-filter-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-dim);
+      padding-top: 4px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cwa-count-badge {
+      font-family: var(--font-mono);
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .cwa-hint-text {
+      color: var(--text-muted);
+    }
+
+    /* 表格檢視模式 */
+    .cwa-table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: rgba(5, 12, 28, 0.8);
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .cwa-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .cwa-table th {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 22, 46, 0.98);
+      padding: 10px 12px;
+      font-weight: 700;
+      color: var(--color-primary);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.25);
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    .cwa-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      vertical-align: middle;
+      transition: background 0.15s;
+    }
+
+    .cwa-table tr:hover td {
+      background: rgba(0, 242, 254, 0.07);
+      cursor: pointer;
+    }
+
+    .cwa-table tr.active td {
+      background: rgba(0, 242, 254, 0.16);
+      color: #ffffff;
+    }
+
+    .cwa-route-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: #c4b5fd;
+      white-space: nowrap;
+    }
+
     /* 官方精選歷史颱風卡片網格 */
     .cwa-card-grid {
       display: grid;
@@ -2253,6 +2473,120 @@
       background: rgba(245, 158, 11, 0.2);
       border: 1px solid rgba(245, 158, 11, 0.6);
       color: #fbbf24;
+    }
+
+    .cwa-intensity-pill.mild {
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.6);
+      color: #93c5fd;
+    }
+
+    .btn-table-apply {
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(0, 242, 254, 0.15);
+      border: 1px solid var(--border-focus);
+      color: var(--color-primary);
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s var(--bounce-timing);
+    }
+
+    .btn-table-apply:hover {
+      background: var(--color-primary);
+      color: #060d1d;
+      box-shadow: 0 0 10px var(--glow-cyan);
+    }
+
+    .cwa-table tr.active .btn-table-apply {
+      background: #10b981;
+      border-color: #10b981;
+      color: #060d1d;
+    }
+
+    /* 左側面板快速下拉選單 */
+    .cwa-quick-dropdown {
+      width: 100%;
+      background: rgba(6, 12, 26, 0.9);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 11px;
+      color: var(--text-main);
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cwa-quick-dropdown:hover, .cwa-quick-dropdown:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 10px var(--glow-cyan);
+      color: #ffffff;
+    }
+
+    .cwa-quick-dropdown option {
+      background: #091326;
+      color: #ffffff;
+    }
+
+    /* 自訂/動態載入表單容器 */
+    .cwa-custom-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: rgba(8, 16, 36, 0.7);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .cwa-custom-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .cwa-custom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cwa-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cwa-form-group label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .cwa-form-input, .cwa-form-textarea {
+      background: rgba(4, 9, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #ffffff;
+      font-size: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .cwa-form-input:focus, .cwa-form-textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 10px var(--glow-cyan);
+    }
+
+    .cwa-form-textarea {
+      font-family: var(--font-mono);
+      min-height: 90px;
+      resize: vertical;
     }
 
     .cwa-card-metrics {
@@ -2619,6 +2953,11 @@
             <span>23' 海葵颱風</span>
             <span class="chip-sub">945hPa / 43m/s</span>
           </button>
+        </div>
+        <div style="margin-top: 8px;">
+          <select class="cwa-quick-dropdown" id="cwaQuickDropdown" title="直接選取並動態讀取歷年任一颱風">
+            <option value="" disabled selected>⚡ 動態讀取歷年侵台颱風 (31筆一覽)...</option>
+          </select>
         </div>
       </div>
 
@@ -3300,20 +3639,108 @@
         <!-- 頂部切換標籤列 -->
         <div class="cwa-tabs-row">
           <div class="cwa-tabs-group">
-            <button class="cwa-tab active" data-tab="archive" id="tabBtnArchive">🏛️ 官方精選歷史強颱 (6大代表)</button>
-            <button class="cwa-tab" data-tab="live" id="tabBtnLive">📡 即時連線氣象署 API (W-C0034-001)</button>
+            <button class="cwa-tab active" data-tab="catalog" id="tabBtnCatalog">📚 歷年侵台最佳追蹤資料庫 (Best Track 完整列表)</button>
+            <button class="cwa-tab" data-tab="live" id="tabBtnLive">📡 官方 API 即時動態 (W-C0034-001)</button>
+            <button class="cwa-tab" data-tab="custom" id="tabBtnCustom">⚡ 動態自訂/外部載入</button>
             <button class="cwa-tab" data-tab="json" id="tabBtnJson">📋 結構化資料 (JSON Preview)</button>
           </div>
           <div class="cwa-status-badge">
             <span class="cwa-live-dot"></span>
-            <span id="cwaStatusText">CWA Open Data 連線就緒</span>
+            <span id="cwaStatusText">CWA Best-Track 就緒</span>
           </div>
         </div>
 
-        <!-- 分頁 1：官方精選歷史颱風資料庫卡片網格 -->
-        <div class="cwa-tab-content active" id="tabContentArchive">
-          <div class="cwa-card-grid" id="cwaCardGrid">
-            <!-- 由 JS 動態注入 6 款指標性強颱卡片 -->
+        <!-- 分頁 1：歷年侵台最佳追蹤資料庫 (Best Track 完整列表) -->
+        <div class="cwa-tab-content active" id="tabContentCatalog">
+          <!-- 搜尋與多維度篩選工具列 -->
+          <div class="cwa-filter-toolbar">
+            <div class="cwa-search-box">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" class="cwa-search-input" id="cwaSearchInput" placeholder="搜尋颱風名稱（例如：山陀兒、凱米、賀伯、莫拉克、NARI、高雄、西北颱...）">
+              <button class="cwa-search-clear" id="btnCwaClearSearch" title="清除搜尋" style="display: none;">✕</button>
+            </div>
+            <div class="cwa-filter-row">
+              <select class="cwa-select" id="cwaFilterYear" title="篩選年份年代">
+                <option value="all">📅 全部年份 (1963~2024)</option>
+                <option value="2020s">2020 年代 (2020~2024)</option>
+                <option value="2010s">2010 年代 (2010~2019)</option>
+                <option value="2000s">2000 年代 (2000~2009)</option>
+                <option value="classic">20 世紀經典 (1963~1999)</option>
+              </select>
+              <select class="cwa-select" id="cwaFilterRoute" title="篩選 CWA 侵台路徑分類">
+                <option value="all">🧭 全部侵台路徑 (全10類)</option>
+                <option value="1">第 1 類：西北颱 / 通過北部海面</option>
+                <option value="2">第 2 類：北部通過或宜蘭登陸</option>
+                <option value="3">第 3 類：中部通過或花蓮登陸</option>
+                <option value="4">第 4 類：南部通過或台東登陸</option>
+                <option value="5">第 5 類：巴士海峽穿過 / 恆春掠過</option>
+                <option value="6">第 6 類：東部近海北上</option>
+                <option value="7">第 7 類：台灣海峽北上 (西南氣流)</option>
+                <option value="8">第 8 類：台灣海峽南下</option>
+                <option value="9">第 9 類：由西向東穿過台灣</option>
+                <option value="special">特殊路徑：滯留、打轉、回旋怪颱</option>
+              </select>
+              <select class="cwa-select" id="cwaFilterIntensity" title="篩選颱風強度">
+                <option value="all">🌪️ 全部強度等級</option>
+                <option value="strong">強烈颱風 (≥51.0 m/s)</option>
+                <option value="moderate">中度颱風 (32.7~50.9 m/s)</option>
+                <option value="mild">輕度颱風 (17.2~32.6 m/s)</option>
+              </select>
+              <div class="cwa-view-toggle">
+                <button class="cwa-toggle-btn active" id="btnViewCards" title="卡片檢視">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                  <span>卡片</span>
+                </button>
+                <button class="cwa-toggle-btn" id="btnViewTable" title="清單列表檢視">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                  </svg>
+                  <span>清單列表</span>
+                </button>
+              </div>
+              <button class="cwa-btn-reset" id="btnResetFilters" title="重設所有篩選條件">↺ 重設</button>
+            </div>
+            <div class="cwa-filter-summary">
+              <span class="cwa-count-badge" id="cwaCountBadge">共收錄 31 個經典侵台颱風・目前顯示 31 個</span>
+              <span class="cwa-hint-text">💡 點選任一颱風（卡片或清單列表），即刻動態讀取實測物理參數至工作台</span>
+            </div>
+          </div>
+
+          <!-- 卡片清單網格 -->
+          <div class="cwa-card-grid" id="cwaCardGrid" style="margin-top: 14px;"></div>
+
+          <!-- 表格詳細清單模式 -->
+          <div class="cwa-table-container" id="cwaTableContainer" style="display: none; margin-top: 14px;">
+            <table class="cwa-table" id="cwaTable">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">狀態</th>
+                  <th>颱風名稱 / 國際編號</th>
+                  <th>年份</th>
+                  <th>強度等級</th>
+                  <th>CWA 路徑</th>
+                  <th>中心氣壓</th>
+                  <th>近中心風速</th>
+                  <th>7級風半徑</th>
+                  <th>登陸地點 / 歷史災情特徵</th>
+                  <th style="text-align: center;">動態讀取</th>
+                </tr>
+              </thead>
+              <tbody id="cwaTableBody"></tbody>
+            </table>
           </div>
         </div>
 
@@ -3323,7 +3750,7 @@
             <div style="font-size: 13px; line-height: 1.6; color: var(--text-main);">
               <strong style="color: var(--color-primary);">📡 介接中央氣象署開放資料平臺（Open Data REST API）</strong><br>
               <span style="font-size: 11px; color: var(--text-dim);">
-                透過官方資料集代碼 <code>W-C0034-001</code>（颱風警報及動態資訊）向氣象署端點發送請求，獲取當前在途颱風之中心座標、中心氣壓、近中心最大風速與七級／十級暴風半徑。
+                透過官方資料集代碼 <code>W-C0034-001</code>（颱風警報及動態資訊）向氣象署端點發送即時請求，即時動態獲取當前在途颱風之中心座標、中心氣壓、近中心最大風速與七級／十級暴風半徑。
               </span>
             </div>
 
@@ -3334,6 +3761,9 @@
                   <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
                 </svg>
                 <span>即刻向氣象署抓取即時警報</span>
+              </button>
+              <button class="cwa-tab" id="btnSimulateLiveAlert" style="padding: 10px 14px; font-size: 12px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.5); color: #fbbf24; border-radius: 8px; cursor: pointer;">
+                💡 演練示範：動態載入在途強颱警報模擬
               </button>
             </div>
 
@@ -3346,7 +3776,7 @@
                 <span style="font-size: 10px; color: var(--text-dim); font-family: var(--font-mono);" id="cwaLiveQueryTime">端點: opendata.cwa.gov.tw</span>
               </div>
               <div id="cwaLiveFeedbackMsg" style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
-                點擊上方按鈕可即時檢驗當前西北太平洋洋面是否有中央氣象署發布之海上或陸上颱風警報。如逢非警報發布期，建議切換至「官方精選歷史強颱」體驗 2024 凱米、山陀兒、康芮之實測動力學數據。
+                點擊上方按鈕可即時檢驗當前西北太平洋洋面是否有中央氣象署發布之海上或陸上颱風警報。如逢非警報發布期，建議切換至「歷年侵台最佳追蹤資料庫」體驗 31 款指標性實測紀錄，或點擊「演練示範」動態載入在途警報。
               </div>
               <div id="cwaLiveActiveAction" style="display: none; margin-top: 10px;">
                 <button class="btn-apply-cwa" id="btnApplyLiveTyphoon" style="background: var(--gradient-primary); color: #060d1d;">
@@ -3357,10 +3787,69 @@
           </div>
         </div>
 
-        <!-- 分頁 3：結構化 JSON 代碼檢視器 -->
+        <!-- 分頁 3：動態自訂 / 外部資料讀取器 -->
+        <div class="cwa-tab-content" id="tabContentCustom" style="display: none;">
+          <div class="cwa-custom-container">
+            <div style="font-size: 13px; line-height: 1.6; color: var(--text-main);">
+              <strong style="color: var(--color-primary);">⚡ 動態自訂颱風參數或讀入外部 CWA JSON</strong><br>
+              <span style="font-size: 11px; color: var(--text-dim);">
+                您可以手動填寫觀測物理量，或直接貼入中央氣象署 / JMA 等官方 JSON 觀測段落，點擊動態注入後，系統將即刻運算半徑與流場並載入工作台。
+              </span>
+            </div>
+
+            <div class="cwa-custom-grid">
+              <div class="cwa-form-group">
+                <label>颱風中文名稱</label>
+                <input type="text" class="cwa-form-input" id="customNameZh" placeholder="如：天鴿" value="自訂颱風">
+              </div>
+              <div class="cwa-form-group">
+                <label>國際英文代號</label>
+                <input type="text" class="cwa-form-input" id="customNameEn" placeholder="如：HATO" value="CUSTOM_STORM">
+              </div>
+              <div class="cwa-form-group">
+                <label>中心最低氣壓 (hPa)</label>
+                <input type="number" class="cwa-form-input" id="customPressure" placeholder="900~990" value="920">
+              </div>
+              <div class="cwa-form-group">
+                <label>近中心最大風速 (m/s)</label>
+                <input type="number" class="cwa-form-input" id="customMaxWind" placeholder="20~65" value="53">
+              </div>
+              <div class="cwa-form-group">
+                <label>七級風暴風半徑 (km)</label>
+                <input type="number" class="cwa-form-input" id="customRadius7kt" placeholder="100~350" value="260">
+              </div>
+              <div class="cwa-form-group">
+                <label>CWA 侵台路徑分類 (1~10 或 special)</label>
+                <select class="cwa-form-input" id="customRouteId">
+                  <option value="2">第 2 類：北部通過或宜蘭登陸</option>
+                  <option value="1">第 1 類：西北颱 / 通過北部海面</option>
+                  <option value="3">第 3 類：中部通過或花蓮登陸</option>
+                  <option value="4">第 4 類：南部通過或台東登陸</option>
+                  <option value="5">第 5 類：巴士海峽穿過</option>
+                  <option value="6">第 6 類：東部近海北上</option>
+                  <option value="7">第 7 類：台灣海峽北上</option>
+                  <option value="9">第 9 類：由西向東穿過</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="cwa-form-group">
+              <label>或直接貼上外部 CWA JSON 代碼 (選填)</label>
+              <textarea class="cwa-form-textarea" id="customJsonInput" placeholder='{"typhoonNameZh": "自訂", "centerPressure_hPa": 930, "maxWindSpeed_ms": 48, ...}'></textarea>
+            </div>
+
+            <div>
+              <button class="btn-apply-cwa" id="btnApplyCustomTyphoon" style="background: var(--gradient-primary); color: #060d1d; padding: 12px;">
+                ⚡ 動態注入此自訂颱風至工作台
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分頁 4：結構化 JSON 代碼檢視器 -->
         <div class="cwa-tab-content" id="tabContentJson" style="display: none;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-            <span style="font-size: 11px; color: var(--text-dim); font-family: var(--font-mono);">標準 CWA 颱風實測觀測格式 JSON</span>
+            <span style="font-size: 11px; color: var(--text-dim); font-family: var(--font-mono);">當前動態讀取之 CWA 颱風實測觀測格式 JSON</span>
             <button class="cwa-tab" id="btnCopyCwaJson" style="padding: 4px 10px; font-size: 11px; background: rgba(0, 242, 254, 0.15); border: 1px solid var(--border-focus); border-radius: 6px; color: var(--color-primary); cursor: pointer;">
               複製 JSON 數據
             </button>
@@ -4904,7 +5393,8 @@
     });
 
     // =========================================================================
-    // 13. 中央氣象署 (CWA) 官方颱風觀測資料庫引擎 (CWA Data Explorer Engine)
+    // 13. 中央氣象署 (CWA) 官方颱風觀測資料庫引擎 (CWA Best-Track Explorer Engine)
+    // 收錄 1963~2024 年 31 款指標性侵台颱風與 W-C0034-001 即時動態解析
     // =========================================================================
     const CWA_TYPHOON_DATABASE = {
       gaemi: {
@@ -5035,6 +5525,358 @@
           { t: 100, x: 180, y: 640 }
         ]
       },
+      koinu: {
+        id: "koinu",
+        cwaName: "小犬",
+        intlName: "KOINU",
+        year: 2023,
+        cwaNo: "202314",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 5,
+        pressure: 940,
+        maxWind: 45,
+        gustWind: 55,
+        radius7kt: 250,
+        radius10kt: 90,
+        rainExtreme: 800,
+        motionSpeed: 13,
+        motionDir: "西",
+        landfallLocation: "恆春半島掠過 / 鵝鑾鼻南方",
+        landfallTime: "2023-10-05 08:20",
+        tags: ["#蘭嶼95.2ms破台灣歷史紀錄", "#第5類恆春近海掠過", "#狂風摧毀蘭嶼氣象站"],
+        summary: "近中心掠過恆春半島南端。外圍眼牆強風帶於蘭嶼測站測得每秒 95.2 公尺（17 級以上破表）的狂暴瞬間陣風，打破台灣 126 年設站以來的最高紀錄，甚至吹毀測站風速儀。",
+        threats: { yilan: 45, east: 88, taipei: 35, south: 95, central: 40 },
+        principle: "orographic",
+        pathD: "M 840,750 C 680,750 510,750 350,750 C 240,750 150,750 90,750",
+        points: [
+          { t: 0, x: 840, y: 750 },
+          { t: 25, x: 680, y: 750 },
+          { t: 50, x: 510, y: 750 },
+          { t: 75, x: 350, y: 750 },
+          { t: 100, x: 150, y: 750 }
+        ]
+      },
+      doksuri: {
+        id: "doksuri",
+        cwaName: "杜蘇芮",
+        intlName: "DOKSURI",
+        year: 2023,
+        cwaNo: "202305",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 5,
+        pressure: 940,
+        maxWind: 45,
+        gustWind: 55,
+        radius7kt: 280,
+        radius10kt: 100,
+        rainExtreme: 1050,
+        motionSpeed: 22,
+        motionDir: "北北西",
+        landfallLocation: "巴士海峽西進福建",
+        landfallTime: "2023-07-28 10:00",
+        tags: ["#第5類巴士海峽穿過", "#花東強迫抬升豪雨", "#外圍廣大環流"],
+        summary: "環流龐大，沿巴士海峽由東南往西北推進，其迎風面強迫抬升作用令花蓮、台東及屏東山區降下超過千毫米豪大雨，金門更觀測到 12 級平均風暴。",
+        threats: { yilan: 55, east: 92, taipei: 30, south: 90, central: 45 },
+        principle: "orographic",
+        pathD: "M 840,790 C 690,760 520,740 370,720 C 260,700 180,680 100,640",
+        points: [
+          { t: 0, x: 840, y: 790 },
+          { t: 25, x: 690, y: 760 },
+          { t: 50, x: 520, y: 740 },
+          { t: 75, x: 370, y: 720 },
+          { t: 100, x: 180, y: 680 }
+        ]
+      },
+      chanthu: {
+        id: "chanthu",
+        cwaName: "璨樹",
+        intlName: "CHANTHU",
+        year: 2021,
+        cwaNo: "202114",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 6,
+        pressure: 915,
+        maxWind: 55,
+        gustWind: 68,
+        radius7kt: 200,
+        radius10kt: 70,
+        rainExtreme: 650,
+        motionSpeed: 20,
+        motionDir: "北北東",
+        landfallLocation: "沿東部近海北上（未登陸）",
+        landfallTime: "2021-09-12 12:00",
+        tags: ["#第6類東部近海北上", "#針狀極小眼牆小鋼炮", "#中央山脈西側背風沉降"],
+        summary: "結構極度紮實的「小鋼炮」強颱，具備教科書級別的針狀清晰颱風眼。緊貼台灣東部近海高速北上，西半部因中央山脈阻擋呈現顯著背風晴朗高溫與沉降焚風。",
+        threats: { yilan: 85, east: 90, taipei: 65, south: 40, central: 25 },
+        principle: "foehn",
+        pathD: "M 650,820 C 580,650 530,460 510,280 C 500,180 500,100 510,40",
+        points: [
+          { t: 0, x: 650, y: 820 },
+          { t: 25, x: 580, y: 650 },
+          { t: 50, x: 530, y: 460 },
+          { t: 75, x: 510, y: 280 },
+          { t: 100, x: 500, y: 100 }
+        ]
+      },
+      lekima: {
+        id: "lekima",
+        cwaName: "利奇馬",
+        intlName: "LEKIMA",
+        year: 2019,
+        cwaNo: "201909",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 1,
+        pressure: 925,
+        maxWind: 51,
+        gustWind: 63,
+        radius7kt: 280,
+        radius10kt: 100,
+        rainExtreme: 850,
+        motionSpeed: 16,
+        motionDir: "西北北",
+        landfallLocation: "通過台灣北部近海（鼻頭角東北外海）",
+        landfallTime: "2019-08-09 15:00",
+        tags: ["#第1類典型西北颱", "#北部外海掠過", "#竹苗乾熱沉降焚風"],
+        summary: "典型第 1 類路徑西北颱，自東北部海面朝西北西推進。強烈外圍雨帶為北部山區帶來持續性豪雨，而西南部與竹苗一帶則出現背風沉降高溫達 38℃。",
+        threats: { yilan: 90, east: 60, taipei: 92, south: 45, central: 50 },
+        principle: "foehn",
+        pathD: "M 830,300 C 680,240 510,180 360,150 C 270,130 180,120 100,110",
+        points: [
+          { t: 0, x: 830, y: 300 },
+          { t: 25, x: 680, y: 240 },
+          { t: 50, x: 510, y: 180 },
+          { t: 75, x: 360, y: 150 },
+          { t: 100, x: 180, y: 120 }
+        ]
+      },
+      mitag: {
+        id: "mitag",
+        cwaName: "米塔",
+        intlName: "MITAG",
+        year: 2019,
+        cwaNo: "201918",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 1,
+        pressure: 965,
+        maxWind: 35,
+        gustWind: 45,
+        radius7kt: 180,
+        radius10kt: 60,
+        rainExtreme: 600,
+        motionSpeed: 25,
+        motionDir: "北北西",
+        landfallLocation: "緊貼東北角三貂角近海北上",
+        landfallTime: "2019-09-30 22:00",
+        tags: ["#第1類東北角掠過", "#大台北強烈陣風", "#宜蘭強降雨"],
+        summary: "快速貼著宜蘭外海與新北東北角北上，北海岸及基隆迎風面掀起 12 級強陣風與強烈地形降水。",
+        threats: { yilan: 88, east: 70, taipei: 85, south: 25, central: 30 },
+        principle: "orographic",
+        pathD: "M 830,340 C 680,270 520,200 370,160 C 280,135 190,125 110,115",
+        points: [
+          { t: 0, x: 830, y: 340 },
+          { t: 25, x: 680, y: 270 },
+          { t: 50, x: 520, y: 200 },
+          { t: 75, x: 370, y: 160 },
+          { t: 100, x: 190, y: 125 }
+        ]
+      },
+      maria: {
+        id: "maria",
+        cwaName: "瑪莉亞",
+        intlName: "MARIA",
+        year: 2018,
+        cwaNo: "201808",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 1,
+        pressure: 915,
+        maxWind: 55,
+        gustWind: 68,
+        radius7kt: 280,
+        radius10kt: 100,
+        rainExtreme: 500,
+        motionSpeed: 30,
+        motionDir: "西北西",
+        landfallLocation: "快速掠過彭佳嶼與馬祖",
+        landfallTime: "2018-07-11 02:00",
+        tags: ["#高速飛馳西北颱", "#馬祖破紀錄強風", "#北部水庫大進補"],
+        summary: "移速高達每小時 30 公里以上的疾速強烈颱風。中心掠過彭佳嶼，馬祖測站測得 16 級狂暴陣風，北部水庫在 12 小時內迅速蓄水解旱。",
+        threats: { yilan: 80, east: 45, taipei: 88, south: 20, central: 35 },
+        principle: "orographic",
+        pathD: "M 830,280 C 680,220 510,160 360,130 C 270,115 180,110 100,105",
+        points: [
+          { t: 0, x: 830, y: 280 },
+          { t: 25, x: 680, y: 220 },
+          { t: 50, x: 510, y: 160 },
+          { t: 75, x: 360, y: 130 },
+          { t: 100, x: 180, y: 110 }
+        ]
+      },
+      nesat: {
+        id: "nesat",
+        cwaName: "尼莎",
+        intlName: "NESAT",
+        year: 2017,
+        cwaNo: "201709",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 2,
+        pressure: 960,
+        maxWind: 40,
+        gustWind: 50,
+        radius7kt: 180,
+        radius10kt: 60,
+        rainExtreme: 650,
+        motionSpeed: 20,
+        motionDir: "西北西",
+        landfallLocation: "宜蘭蘇澳鎮",
+        landfallTime: "2017-07-29 19:10",
+        tags: ["#第2類宜蘭快閃登陸", "#雙颱藤原效應引進海棠", "#宜蘭16級強陣風"],
+        summary: "自蘇澳登陸後僅花 3 小時便快閃出海進入台灣海峽。但其環流隨後與南方的海棠颱風產生藤原效應，引爆接力侵台雙颱情境。",
+        threats: { yilan: 96, east: 80, taipei: 75, south: 60, central: 40 },
+        principle: "orographic",
+        pathD: "M 830,420 C 680,350 510,240 380,200 C 290,170 190,170 120,160",
+        points: [
+          { t: 0, x: 830, y: 420 },
+          { t: 25, x: 680, y: 350 },
+          { t: 50, x: 510, y: 240 },
+          { t: 75, x: 380, y: 200 },
+          { t: 100, x: 190, y: 170 }
+        ]
+      },
+      haitang: {
+        id: "haitang",
+        cwaName: "海棠",
+        intlName: "HAITANG",
+        year: 2017,
+        cwaNo: "201710",
+        intensity: "輕度颱風",
+        intensityLevel: "mild",
+        routeId: 5,
+        pressure: 990,
+        maxWind: 20,
+        gustWind: 28,
+        radius7kt: 100,
+        radius10kt: 0,
+        rainExtreme: 700,
+        motionSpeed: 25,
+        motionDir: "北北東",
+        landfallLocation: "屏東楓港登陸",
+        landfallTime: "2017-07-30 17:15",
+        tags: ["#雙颱接力登陸", "#第5類南端登陸", "#西南氣流南台灣豪雨"],
+        summary: "緊接在尼莎出海後數小時於屏東楓港登陸，創下少見的「50年內同一天兩個颱風登陸台灣」歷史紀錄，為屏東帶來 700mm 狂暴雨勢。",
+        threats: { yilan: 20, east: 50, taipei: 25, south: 95, central: 40 },
+        principle: "monsoon",
+        pathD: "M 320,830 C 330,750 340,660 350,560 C 360,420 370,280 380,140",
+        points: [
+          { t: 0, x: 320, y: 830 },
+          { t: 25, x: 330, y: 750 },
+          { t: 50, x: 340, y: 660 },
+          { t: 75, x: 360, y: 420 },
+          { t: 100, x: 380, y: 140 }
+        ]
+      },
+      meranti: {
+        id: "meranti",
+        cwaName: "莫蘭蒂",
+        intlName: "MERANTI",
+        year: 2016,
+        cwaNo: "201614",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 5,
+        pressure: 890,
+        maxWind: 60,
+        gustWind: 75,
+        radius7kt: 220,
+        radius10kt: 90,
+        rainExtreme: 900,
+        motionSpeed: 20,
+        motionDir: "西北西",
+        landfallLocation: "通過巴士海峽近海（恆春南端掠過）",
+        landfallTime: "2016-09-14 10:00",
+        tags: ["#890hPa巔峰強颱", "#恆春測站破百年17級風", "#高雄港貨櫃倒塌斷纜"],
+        summary: "21世紀全球巔峰氣壓最低的超級風暴之一（中心氣壓 890 hPa）。掠過恆春半島近海時，恆春測站測得 52.2 m/s（破 120 年紀錄陣風），高雄港數萬噸貨輪斷纜漂流。",
+        threats: { yilan: 35, east: 90, taipei: 25, south: 100, central: 30 },
+        principle: "orographic",
+        pathD: "M 840,780 C 680,770 510,760 350,750 C 240,740 150,730 80,720",
+        points: [
+          { t: 0, x: 840, y: 780 },
+          { t: 25, x: 680, y: 770 },
+          { t: 50, x: 510, y: 760 },
+          { t: 75, x: 350, y: 750 },
+          { t: 100, x: 150, y: 730 }
+        ]
+      },
+      megi: {
+        id: "megi",
+        cwaName: "梅姬",
+        intlName: "MEGI",
+        year: 2016,
+        cwaNo: "201617",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 3,
+        pressure: 940,
+        maxWind: 45,
+        gustWind: 55,
+        radius7kt: 250,
+        radius10kt: 100,
+        rainExtreme: 1100,
+        motionSpeed: 21,
+        motionDir: "西北西",
+        landfallLocation: "花蓮市登陸",
+        landfallTime: "2016-09-27 14:00",
+        tags: ["#第3類花蓮登陸", "#全台風場擴張大風暴", "#全台四百萬戶停電"],
+        summary: "強風圈極端廣闊的大型風暴。登陸花蓮時全台 20 個氣象站實測風力達 10 級以上，造成全台逾 400 萬戶大停電與台中清泉崗 13 級破紀錄狂風。",
+        threats: { yilan: 90, east: 98, taipei: 88, south: 80, central: 85 },
+        principle: "orographic",
+        pathD: "M 830,520 C 670,470 500,420 360,380 C 260,330 170,260 110,180",
+        points: [
+          { t: 0, x: 830, y: 520 },
+          { t: 25, x: 670, y: 470 },
+          { t: 50, x: 500, y: 420 },
+          { t: 75, x: 360, y: 380 },
+          { t: 100, x: 170, y: 260 }
+        ]
+      },
+      nepartak: {
+        id: "nepartak",
+        cwaName: "尼伯特",
+        intlName: "NEPARTAK",
+        year: 2016,
+        cwaNo: "201601",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 4,
+        pressure: 905,
+        maxWind: 58,
+        gustWind: 70,
+        radius7kt: 200,
+        radius10kt: 80,
+        rainExtreme: 800,
+        motionSpeed: 17,
+        motionDir: "西北西",
+        landfallLocation: "台東太麻里鄉",
+        landfallTime: "2016-07-08 05:50",
+        tags: ["#905hPa強烈颱風", "#台東市區17級摧毀性陣風", "#太麻里直撲"],
+        summary: "以頂峰之姿直撲台東太麻里。台東市區測得 57.2 m/s（破百年的 17 級以上狂風），市區招牌與樹木遭全面摧毀，展示了迎風面第一排無遮蔽的恐怖風壓。",
+        threats: { yilan: 50, east: 100, taipei: 40, south: 92, central: 45 },
+        principle: "orographic",
+        pathD: "M 820,620 C 660,610 470,620 340,630 C 260,635 180,640 110,645",
+        points: [
+          { t: 0, x: 820, y: 620 },
+          { t: 25, x: 660, y: 610 },
+          { t: 50, x: 470, y: 620 },
+          { t: 75, x: 340, y: 630 },
+          { t: 100, x: 180, y: 640 }
+        ]
+      },
       soudelor: {
         id: "soudelor",
         cwaName: "蘇迪勒",
@@ -5065,6 +5907,102 @@
           { t: 50, x: 510, y: 240 },
           { t: 75, x: 380, y: 200 },
           { t: 100, x: 190, y: 170 }
+        ]
+      },
+      dujuan: {
+        id: "dujuan",
+        cwaName: "杜鵑",
+        intlName: "DUJUAN",
+        year: 2015,
+        cwaNo: "201521",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 2,
+        pressure: 925,
+        maxWind: 51,
+        gustWind: 63,
+        radius7kt: 220,
+        radius10kt: 80,
+        rainExtreme: 900,
+        motionSpeed: 21,
+        motionDir: "西北西",
+        landfallLocation: "宜蘭南澳鄉",
+        landfallTime: "2015-09-28 17:40",
+        tags: ["#強烈中秋颱", "#蘇澳測站17級強陣風", "#天文超級大潮暴潮"],
+        summary: "逢中秋天文大潮期間登陸宜蘭南澳。蘇澳測得破紀錄每秒 68.4 公尺（17 級以上強風），淡水河沿岸出現罕見潮水倒灌與嚴重淹水。",
+        threats: { yilan: 98, east: 82, taipei: 90, south: 50, central: 60 },
+        principle: "orographic",
+        pathD: "M 830,420 C 680,350 510,240 380,200 C 290,170 190,170 120,160",
+        points: [
+          { t: 0, x: 830, y: 420 },
+          { t: 25, x: 680, y: 350 },
+          { t: 50, x: 510, y: 240 },
+          { t: 75, x: 380, y: 200 },
+          { t: 100, x: 190, y: 170 }
+        ]
+      },
+      soulik: {
+        id: "soulik",
+        cwaName: "蘇力",
+        intlName: "SOULIK",
+        year: 2013,
+        cwaNo: "201307",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 2,
+        pressure: 935,
+        maxWind: 48,
+        gustWind: 58,
+        radius7kt: 280,
+        radius10kt: 100,
+        rainExtreme: 950,
+        motionSpeed: 22,
+        motionDir: "西北西",
+        landfallLocation: "新北貢寮 / 宜蘭頭城交界",
+        landfallTime: "2013-07-13 03:00",
+        tags: ["#第2類北部登陸", "#基隆河上游暴雨", "#北部廣大強風場"],
+        summary: "結構對稱龐大的環形颱風，自新北貢寮登陸，為雪山山脈迎風面帶來持續性極端豪雨，翡翠水庫水位一天之內暴漲十餘公尺。",
+        threats: { yilan: 92, east: 75, taipei: 92, south: 40, central: 55 },
+        principle: "orographic",
+        pathD: "M 830,400 C 680,330 510,230 380,190 C 290,160 190,160 120,150",
+        points: [
+          { t: 0, x: 830, y: 400 },
+          { t: 25, x: 680, y: 330 },
+          { t: 50, x: 510, y: 230 },
+          { t: 75, x: 380, y: 190 },
+          { t: 100, x: 190, y: 160 }
+        ]
+      },
+      tembin: {
+        id: "tembin",
+        cwaName: "天秤",
+        intlName: "TEMBIN",
+        year: 2012,
+        cwaNo: "201214",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 5,
+        pressure: 945,
+        maxWind: 45,
+        gustWind: 55,
+        radius7kt: 180,
+        radius10kt: 50,
+        rainExtreme: 750,
+        motionSpeed: 10,
+        motionDir: "迴旋怪異打轉",
+        landfallLocation: "屏東牡丹鄉登陸後海峽逆轉",
+        landfallTime: "2012-08-24 05:00",
+        tags: ["#海峽逆時針迴旋打轉", "#與布拉萬藤原效應", "#恆春市區重創百年水災"],
+        summary: "氣象史上著名的回旋怪颱。登陸牡丹後出海，在台灣海峽受東側布拉萬颱風牽引，竟在海峽逆時針完成 360 度大迴旋打轉二度撲向南台灣，恆春市區遭受百年未見淹水。",
+        threats: { yilan: 30, east: 70, taipei: 20, south: 98, central: 40 },
+        principle: "decoupling",
+        pathD: "M 820,740 C 650,750 450,740 340,730 C 220,720 180,620 230,540 C 290,510 370,560 360,680",
+        points: [
+          { t: 0, x: 820, y: 740 },
+          { t: 25, x: 550, y: 750 },
+          { t: 50, x: 340, y: 730 },
+          { t: 75, x: 200, y: 640 },
+          { t: 100, x: 360, y: 680 }
         ]
       },
       morakot: {
@@ -5098,22 +6036,395 @@
           { t: 75, x: 345, y: 280 },
           { t: 100, x: 370, y: 90 }
         ]
+      },
+      sinlaku: {
+        id: "sinlaku",
+        cwaName: "辛樂克",
+        intlName: "SINLAKU",
+        year: 2008,
+        cwaNo: "200813",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 2,
+        pressure: 935,
+        maxWind: 48,
+        gustWind: 58,
+        radius7kt: 250,
+        radius10kt: 100,
+        rainExtreme: 1600,
+        motionSpeed: 7,
+        motionDir: "滯留西北西",
+        landfallLocation: "宜蘭冬山鄉",
+        landfallTime: "2008-09-14 01:45",
+        tags: ["#宜蘭外海打轉滯留", "#后豐大橋斷裂", "#廬山溫泉災情"],
+        summary: "在宜蘭外海近距離滯留打轉超過一日，中心長時間緩慢翻越中央山脈，為中部與東北部帶來連續數天 1,600mm 狂暴雨勢，造成后豐大橋斷裂與廬山溫泉受創。",
+        threats: { yilan: 98, east: 80, taipei: 85, south: 70, central: 92 },
+        principle: "decoupling",
+        pathD: "M 830,420 C 680,350 510,240 380,200 C 290,170 190,170 120,160",
+        points: [
+          { t: 0, x: 830, y: 420 },
+          { t: 25, x: 680, y: 350 },
+          { t: 50, x: 510, y: 240 },
+          { t: 75, x: 380, y: 200 },
+          { t: 100, x: 190, y: 170 }
+        ]
+      },
+      jangmi: {
+        id: "jangmi",
+        cwaName: "薔蜜",
+        intlName: "JANGMI",
+        year: 2008,
+        cwaNo: "200815",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 2,
+        pressure: 925,
+        maxWind: 53,
+        gustWind: 65,
+        radius7kt: 280,
+        radius10kt: 100,
+        rainExtreme: 1100,
+        motionSpeed: 20,
+        motionDir: "西北西",
+        landfallLocation: "宜蘭南澳鄉",
+        landfallTime: "2008-09-28 15:40",
+        tags: ["#秋颱登陸強颱", "#蘇澳破紀錄17級強風", "#風眼極度清晰圓整"],
+        summary: "2008 年西北太平洋最強颱風。登陸南澳時維持強烈颱風巔峰強度，蘇澳測得 62.4 m/s 狂暴陣風，其強大動能更引發大甲溪上游土石流氾濫。",
+        threats: { yilan: 98, east: 85, taipei: 90, south: 50, central: 65 },
+        principle: "orographic",
+        pathD: "M 830,420 C 680,350 510,240 380,200 C 290,170 190,170 120,160",
+        points: [
+          { t: 0, x: 830, y: 420 },
+          { t: 25, x: 680, y: 350 },
+          { t: 50, x: 510, y: 240 },
+          { t: 75, x: 380, y: 200 },
+          { t: 100, x: 190, y: 170 }
+        ]
+      },
+      krosa: {
+        id: "krosa",
+        cwaName: "柯羅莎",
+        intlName: "KROSA",
+        year: 2007,
+        cwaNo: "200715",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 2,
+        pressure: 925,
+        maxWind: 51,
+        gustWind: 63,
+        radius7kt: 300,
+        radius10kt: 120,
+        rainExtreme: 1200,
+        motionSpeed: 17,
+        motionDir: "逆時針打轉打折登陸",
+        landfallLocation: "宜蘭三貂角近海逆轉",
+        landfallTime: "2007-10-06 22:30",
+        tags: ["#中心逆時針打折打轉", "#大台北地區狂風暴雨", "#雪山山脈迎風面強降雨"],
+        summary: "受中央山脈地形強大阻擋力學效應，在宜蘭外海出現教科書級的「逆時針打轉大折線」後才自三貂角登陸，全台最大陣風達 16 級。",
+        threats: { yilan: 98, east: 88, taipei: 92, south: 45, central: 60 },
+        principle: "decoupling",
+        pathD: "M 830,400 C 680,330 520,250 420,240 C 370,220 340,160 220,150",
+        points: [
+          { t: 0, x: 830, y: 400 },
+          { t: 25, x: 680, y: 330 },
+          { t: 50, x: 420, y: 240 },
+          { t: 75, x: 340, y: 160 },
+          { t: 100, x: 220, y: 150 }
+        ]
+      },
+      mindulle: {
+        id: "mindulle",
+        cwaName: "敏督利",
+        intlName: "MINDULLE",
+        year: 2004,
+        cwaNo: "200407",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 7,
+        pressure: 970,
+        maxWind: 33,
+        gustWind: 43,
+        radius7kt: 200,
+        radius10kt: 50,
+        rainExtreme: 2000,
+        motionSpeed: 18,
+        motionDir: "海峽北上引進西南氣流",
+        landfallLocation: "花蓮登陸後由淡水出海沿海峽北上",
+        landfallTime: "2004-07-02 22:00",
+        tags: ["#七二水災", "#第7類海峽北上", "#狂暴西南氣流輸送帶"],
+        summary: "七二水災元兇。出海後沿台灣海峽緩慢北上，後方引進超強西南氣流，為中南部山區帶來連續數天超過 2,000mm 毀滅性洪澇，大甲溪電廠與松鶴部落全面受創。",
+        threats: { yilan: 50, east: 70, taipei: 45, south: 100, central: 98 },
+        principle: "monsoon",
+        pathD: "M 200,820 C 220,650 240,460 250,280 C 255,180 260,100 270,40",
+        points: [
+          { t: 0, x: 200, y: 820 },
+          { t: 25, x: 220, y: 650 },
+          { t: 50, x: 240, y: 460 },
+          { t: 75, x: 250, y: 280 },
+          { t: 100, x: 260, y: 100 }
+        ]
+      },
+      nari: {
+        id: "nari",
+        cwaName: "納莉",
+        intlName: "NARI",
+        year: 2001,
+        cwaNo: "200116",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 8,
+        pressure: 960,
+        maxWind: 38,
+        gustWind: 48,
+        radius7kt: 150,
+        radius10kt: 50,
+        rainExtreme: 1400,
+        motionSpeed: 8,
+        motionDir: "由東北往西南縱貫滯留49小時",
+        landfallLocation: "新北貢寮三貂角",
+        landfallTime: "2001-09-16 21:40",
+        tags: ["#滯留陸地49小時破紀錄", "#台北捷運板南線全線淹沒", "#縱貫台灣全島怪颱"],
+        summary: "台灣氣象史上不可思議的滯留怪颱。中心在台灣陸地上滯留長達 49 小時，由東北往西南縱貫全島。台北氣象站創下單日 425mm、全台 1,400mm 狂暴雨量，台北捷運與台北車站全面遭洪水淹沒滅頂數月。",
+        threats: { yilan: 95, east: 65, taipei: 100, south: 80, central: 75 },
+        principle: "decoupling",
+        pathD: "M 520,120 C 420,160 380,240 370,360 C 350,500 330,620 310,760",
+        points: [
+          { t: 0, x: 520, y: 120 },
+          { t: 25, x: 400, y: 220 },
+          { t: 50, x: 370, y: 360 },
+          { t: 75, x: 340, y: 550 },
+          { t: 100, x: 310, y: 760 }
+        ]
+      },
+      xangsane: {
+        id: "xangsane",
+        cwaName: "象神",
+        intlName: "XANGSANE",
+        year: 2000,
+        cwaNo: "200020",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 6,
+        pressure: 960,
+        maxWind: 38,
+        gustWind: 48,
+        radius7kt: 250,
+        radius10kt: 80,
+        rainExtreme: 1100,
+        motionSpeed: 23,
+        motionDir: "東部外海北上",
+        landfallLocation: "沿東部外海北上",
+        landfallTime: "2000-11-01 02:00",
+        tags: ["#共伴東北季風效應", "#汐止五堵基隆河大淹水", "#新加坡航空空難"],
+        summary: "典型秋季颱風共伴東北季風效應範例。中心由南往北沿東部外海掠過，強烈共伴鋒面使基隆河上游暴雨成災，汐止、五堵全區淹水深達數層樓高。",
+        threats: { yilan: 95, east: 85, taipei: 95, south: 40, central: 30 },
+        principle: "monsoon",
+        pathD: "M 650,820 C 580,650 530,460 510,280 C 500,180 500,100 510,40",
+        points: [
+          { t: 0, x: 650, y: 820 },
+          { t: 25, x: 580, y: 650 },
+          { t: 50, x: 530, y: 460 },
+          { t: 75, x: 510, y: 280 },
+          { t: 100, x: 500, y: 100 }
+        ]
+      },
+      herb: {
+        id: "herb",
+        cwaName: "賀伯",
+        intlName: "HERB",
+        year: 1996,
+        cwaNo: "199608",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 2,
+        pressure: 920,
+        maxWind: 53,
+        gustWind: 65,
+        radius7kt: 350,
+        radius10kt: 130,
+        rainExtreme: 1987,
+        motionSpeed: 23,
+        motionDir: "西北西",
+        landfallLocation: "宜蘭蘇澳鎮",
+        landfallTime: "1996-07-31 23:20",
+        tags: ["#350km超巨型暴風圈", "#阿里山單日1987mm世界紀錄", "#百年最劇烈風災"],
+        summary: "近代最具毀滅性的巨型強烈颱風。暴風半徑達 350 公里，阿里山測得單日 1,748mm、累計 1,987mm 的世界級恐怖豪雨，引爆陳有蘭溪大土石流與全台重大災情。",
+        threats: { yilan: 99, east: 90, taipei: 96, south: 92, central: 95 },
+        principle: "orographic",
+        pathD: "M 830,420 C 680,350 510,240 380,200 C 290,170 190,170 120,160",
+        points: [
+          { t: 0, x: 830, y: 420 },
+          { t: 25, x: 680, y: 350 },
+          { t: 50, x: 510, y: 240 },
+          { t: 75, x: 380, y: 200 },
+          { t: 100, x: 190, y: 170 }
+        ]
+      },
+      tim: {
+        id: "tim",
+        cwaName: "提姆",
+        intlName: "TIM",
+        year: 1994,
+        cwaNo: "199405",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 3,
+        pressure: 930,
+        maxWind: 50,
+        gustWind: 60,
+        radius7kt: 250,
+        radius10kt: 90,
+        rainExtreme: 900,
+        motionSpeed: 26,
+        motionDir: "西北西",
+        landfallLocation: "花蓮秀林鄉",
+        landfallTime: "1994-07-10 20:00",
+        tags: ["#第3類花蓮登陸", "#花東強烈陣風16級", "#狂風橫掃北台灣"],
+        summary: "快速強烈的第 3 類路徑登陸颱風，花蓮測站測得 16 級狂陣風，蘇花公路與中橫公路遭受重創多處坍方。",
+        threats: { yilan: 90, east: 98, taipei: 80, south: 60, central: 70 },
+        principle: "orographic",
+        pathD: "M 830,520 C 670,470 500,420 360,380 C 260,330 170,260 110,180",
+        points: [
+          { t: 0, x: 830, y: 520 },
+          { t: 25, x: 670, y: 470 },
+          { t: 50, x: 500, y: 420 },
+          { t: 75, x: 360, y: 380 },
+          { t: 100, x: 170, y: 260 }
+        ]
+      },
+      wayne: {
+        id: "wayne",
+        cwaName: "韋恩",
+        intlName: "WAYNE",
+        year: 1986,
+        cwaNo: "198612",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 10,
+        pressure: 960,
+        maxWind: 38,
+        gustWind: 48,
+        radius7kt: 150,
+        radius10kt: 50,
+        rainExtreme: 800,
+        motionSpeed: 12,
+        motionDir: "三進三出濁水溪登陸",
+        landfallLocation: "彰化雲林濁水溪口",
+        landfallTime: "1986-08-22 06:00",
+        tags: ["#三進三出怪颱", "#歷史首度濁水溪口登陸", "#澎湖全島17級狂風摧毀"],
+        summary: "台灣氣象史第一傳奇怪颱。生命期長達 21 天，三進三出台灣近海，由台灣海峽西岸濁水溪口首度強烈登陸，澎湖實測 68 m/s（破 17 級極限狂風）幾乎全毀。",
+        threats: { yilan: 30, east: 50, taipei: 40, south: 95, central: 99 },
+        principle: "decoupling",
+        pathD: "M 80,500 C 200,480 320,470 380,480 C 440,540 390,680 280,660 C 180,630 120,550 90,470",
+        points: [
+          { t: 0, x: 80, y: 500 },
+          { t: 25, x: 260, y: 475 },
+          { t: 50, x: 380, y: 480 },
+          { t: 75, x: 340, y: 670 },
+          { t: 100, x: 120, y: 550 }
+        ]
+      },
+      thelma: {
+        id: "thelma",
+        cwaName: "賽洛瑪",
+        intlName: "THELMA",
+        year: 1977,
+        cwaNo: "197704",
+        intensity: "中度颱風",
+        intensityLevel: "moderate",
+        routeId: 4,
+        pressure: 970,
+        maxWind: 35,
+        gustWind: 45,
+        radius7kt: 150,
+        radius10kt: 50,
+        rainExtreme: 700,
+        motionSpeed: 18,
+        motionDir: "北北東直撲高雄",
+        landfallLocation: "高雄市小港",
+        landfallTime: "1977-07-25 09:10",
+        tags: ["#直撲高雄重創高雄港", "#南台灣近五十年罕見風災", "#高雄港起重機全毀"],
+        summary: "近半世紀重創高雄的經典歷史颱風。自巴士海峽突然轉向正北直撲高雄港，高達 16 級狂風吹倒無數港口起重機，重創南台灣工業基礎。",
+        threats: { yilan: 20, east: 60, taipei: 30, south: 100, central: 50 },
+        principle: "decoupling",
+        pathD: "M 320,830 C 335,760 350,680 365,600 C 370,480 375,360 380,240",
+        points: [
+          { t: 0, x: 320, y: 830 },
+          { t: 25, x: 345, y: 720 },
+          { t: 50, x: 365, y: 600 },
+          { t: 75, x: 375, y: 420 },
+          { t: 100, x: 380, y: 240 }
+        ]
+      },
+      gloria: {
+        id: "gloria",
+        cwaName: "葛樂禮",
+        intlName: "GLORIA",
+        year: 1963,
+        cwaNo: "196314",
+        intensity: "強烈颱風",
+        intensityLevel: "strong",
+        routeId: 1,
+        pressure: 920,
+        maxWind: 50,
+        gustWind: 60,
+        radius7kt: 300,
+        radius10kt: 100,
+        rainExtreme: 1700,
+        motionSpeed: 20,
+        motionDir: "西北西",
+        landfallLocation: "通過台灣北部近海（鼻頭角外海）",
+        landfallTime: "1963-09-11 14:00",
+        tags: ["#第1類始祖西北颱", "#大台北盆地世紀淹水", "#石門水庫狂暴洩洪"],
+        summary: "台灣氣象史上「西北颱」的最經典教材。由於颱風中心自彭佳嶼海面通過，逆時針環流無山脈阻擋直灌淡水河口，恰逢初三天文大潮與石門水庫洩洪，大台北盆地泡水數日，死傷慘重。",
+        threats: { yilan: 95, east: 60, taipei: 100, south: 40, central: 60 },
+        principle: "orographic",
+        pathD: "M 830,300 C 680,240 510,180 360,150 C 270,130 180,120 100,110",
+        points: [
+          { t: 0, x: 830, y: 300 },
+          { t: 25, x: 680, y: 240 },
+          { t: 50, x: 510, y: 180 },
+          { t: 75, x: 360, y: 150 },
+          { t: 100, x: 180, y: 120 }
+        ]
       }
     };
 
     let currentCwaStormId = 'gaemi';
     let latestLiveCwaData = null;
 
+    // 篩選狀態
+    let cwaSearchQuery = '';
+    let cwaFilterYear = 'all';
+    let cwaFilterRoute = 'all';
+    let cwaFilterIntensity = 'all';
+    let cwaViewMode = 'cards'; // 'cards' | 'table'
+
     // DOM 元素引用
     const cwaModalBackdrop = document.getElementById('cwaModalBackdrop');
     const btnCwaData = document.getElementById('btnCwaData');
     const btnTelemetryCwa = document.getElementById('btnTelemetryCwa');
     const btnCwaQuickMore = document.getElementById('btnCwaQuickMore');
+    const cwaQuickDropdown = document.getElementById('cwaQuickDropdown');
     const btnCloseCwaModal = document.getElementById('btnCloseCwaModal');
     const cwaCardGrid = document.getElementById('cwaCardGrid');
+    const cwaTableContainer = document.getElementById('cwaTableContainer');
+    const cwaTableBody = document.getElementById('cwaTableBody');
+    const cwaCountBadge = document.getElementById('cwaCountBadge');
+    const cwaSearchInput = document.getElementById('cwaSearchInput');
+    const btnCwaClearSearch = document.getElementById('btnCwaClearSearch');
+    const cwaFilterYearEl = document.getElementById('cwaFilterYear');
+    const cwaFilterRouteEl = document.getElementById('cwaFilterRoute');
+    const cwaFilterIntensityEl = document.getElementById('cwaFilterIntensity');
+    const btnResetFilters = document.getElementById('btnResetFilters');
+    const btnViewCards = document.getElementById('btnViewCards');
+    const btnViewTable = document.getElementById('btnViewTable');
+
     const cwaJsonDisplay = document.getElementById('cwaJsonDisplay');
     const btnCopyCwaJson = document.getElementById('btnCopyCwaJson');
     const btnFetchLiveCwa = document.getElementById('btnFetchLiveCwa');
+    const btnSimulateLiveAlert = document.getElementById('btnSimulateLiveAlert');
     const cwaApiKeyInput = document.getElementById('cwaApiKeyInput');
     const cwaLiveFeedbackMsg = document.getElementById('cwaLiveFeedbackMsg');
     const cwaLiveHeaderTitle = document.getElementById('cwaLiveHeaderTitle');
@@ -5121,12 +6432,97 @@
     const cwaLiveActiveAction = document.getElementById('cwaLiveActiveAction');
     const btnApplyLiveTyphoon = document.getElementById('btnApplyLiveTyphoon');
 
-    // 渲染 CWA 卡片網格
-    function renderCwaCards() {
+    // 自訂載入器
+    const customNameZh = document.getElementById('customNameZh');
+    const customNameEn = document.getElementById('customNameEn');
+    const customPressure = document.getElementById('customPressure');
+    const customMaxWind = document.getElementById('customMaxWind');
+    const customRadius7kt = document.getElementById('customRadius7kt');
+    const customRouteId = document.getElementById('customRouteId');
+    const customJsonInput = document.getElementById('customJsonInput');
+    const btnApplyCustomTyphoon = document.getElementById('btnApplyCustomTyphoon');
+
+    // 取得篩選後的颱風列表
+    function getFilteredTyphoons() {
+      const all = Object.values(CWA_TYPHOON_DATABASE);
+      const q = cwaSearchQuery.trim().toLowerCase();
+
+      return all.filter(storm => {
+        // 1. 關鍵字搜尋
+        if (q) {
+          const matchName = storm.cwaName.toLowerCase().includes(q) || storm.intlName.toLowerCase().includes(q);
+          const matchYear = String(storm.year).includes(q);
+          const matchDesc = storm.summary.toLowerCase().includes(q) || storm.landfallLocation.toLowerCase().includes(q);
+          const matchTags = storm.tags.some(t => t.toLowerCase().includes(q));
+          if (!matchName && !matchYear && !matchDesc && !matchTags) return false;
+        }
+
+        // 2. 年份年代篩選
+        if (cwaFilterYear !== 'all') {
+          if (cwaFilterYear === '2020s' && (storm.year < 2020 || storm.year > 2029)) return false;
+          if (cwaFilterYear === '2010s' && (storm.year < 2010 || storm.year > 2019)) return false;
+          if (cwaFilterYear === '2000s' && (storm.year < 2000 || storm.year > 2009)) return false;
+          if (cwaFilterYear === 'classic' && storm.year >= 2000) return false;
+        }
+
+        // 3. 路徑分類篩選
+        if (cwaFilterRoute !== 'all') {
+          if (cwaFilterRoute === 'special') {
+            if (storm.routeId !== 'special' && storm.routeId !== 8 && storm.routeId !== 10 && !storm.tags.some(t => t.includes('特殊') || t.includes('怪颱') || t.includes('打轉'))) {
+              return false;
+            }
+          } else {
+            if (String(storm.routeId) !== cwaFilterRoute) return false;
+          }
+        }
+
+        // 4. 強度等級篩選
+        if (cwaFilterIntensity !== 'all') {
+          if (storm.intensityLevel !== cwaFilterIntensity) return false;
+        }
+
+        return true;
+      });
+    }
+
+    // 渲染 CWA 歷史 Best-Track 完整資料庫列表
+    function renderCwaCatalog() {
+      const storms = getFilteredTyphoons();
+      const totalCount = Object.keys(CWA_TYPHOON_DATABASE).length;
+
+      if (cwaCountBadge) {
+        cwaCountBadge.textContent = `共收錄 ${totalCount} 個經典侵台颱風・目前顯示 ${storms.length} 個`;
+      }
+
+      if (cwaViewMode === 'cards') {
+        if (cwaCardGrid) cwaCardGrid.style.display = 'grid';
+        if (cwaTableContainer) cwaTableContainer.style.display = 'none';
+        renderCardGrid(storms);
+      } else {
+        if (cwaCardGrid) cwaCardGrid.style.display = 'none';
+        if (cwaTableContainer) cwaTableContainer.style.display = 'block';
+        renderTableView(storms);
+      }
+    }
+
+    // 渲染卡片模式
+    function renderCardGrid(storms) {
       if (!cwaCardGrid) return;
       cwaCardGrid.innerHTML = '';
 
-      Object.values(CWA_TYPHOON_DATABASE).forEach(storm => {
+      if (storms.length === 0) {
+        cwaCardGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-dim);">
+            <div style="font-size: 32px; margin-bottom: 10px;">🔍</div>
+            <strong style="color: #ffffff; font-size: 14px;">找不到符合篩選條件的颱風紀錄</strong><br>
+            <span style="font-size: 12px; margin-top: 6px; display: inline-block;">請嘗試更換關鍵字或點擊「重設」清除篩選器</span><br>
+            <button class="cwa-btn-reset" onclick="resetAllCwaFilters()" style="margin-top: 14px;">↺ 清除篩選條件</button>
+          </div>
+        `;
+        return;
+      }
+
+      storms.forEach(storm => {
         const isActive = storm.id === currentCwaStormId;
         const card = document.createElement('div');
         card.className = `cwa-card ${isActive ? 'active' : ''}`;
@@ -5141,7 +6537,10 @@
               </div>
               <div class="cwa-card-year">${storm.year} 年・CWA編號 ${storm.cwaNo}</div>
             </div>
-            <span class="cwa-intensity-pill ${storm.intensityLevel}">${storm.intensity}</span>
+            <div style="display: flex; gap: 4px; align-items: center;">
+              <span class="cwa-route-pill">第 ${storm.routeId} 類</span>
+              <span class="cwa-intensity-pill ${storm.intensityLevel}">${storm.intensity}</span>
+            </div>
           </div>
 
           <div class="cwa-card-metrics">
@@ -5159,7 +6558,7 @@
             </div>
             <div class="cwa-metric-item">
               <span class="lbl">24h 累積豪雨</span>
-              <span class="val">${storm.rainExtreme.toLocaleString()} mm</span>
+              <span class="val">${storm.rainExtreme ? storm.rainExtreme.toLocaleString() : '-'} mm</span>
             </div>
           </div>
 
@@ -5171,7 +6570,7 @@
 
           <div class="cwa-card-footer">
             <button class="btn-apply-cwa" onclick="applyCwaTyphoonData('${storm.id}')">
-              ${isActive ? '✓ 當前工作台正使用此資料' : '注入中央氣象署觀測數據'}
+              ${isActive ? '✓ 當前工作台正使用此資料' : '⚡ 動態讀取此颱風實測數據'}
             </button>
           </div>
         `;
@@ -5183,6 +6582,101 @@
         });
 
         cwaCardGrid.appendChild(card);
+      });
+    }
+
+    // 渲染表格清單模式
+    function renderTableView(storms) {
+      if (!cwaTableBody) return;
+      cwaTableBody.innerHTML = '';
+
+      if (storms.length === 0) {
+        cwaTableBody.innerHTML = `
+          <tr>
+            <td colspan="10" style="text-align: center; padding: 30px; color: var(--text-dim);">
+              無符合篩選條件之颱風，請按上方重設按鈕重新整理。
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      storms.forEach(storm => {
+        const isActive = storm.id === currentCwaStormId;
+        const tr = document.createElement('tr');
+        tr.className = isActive ? 'active' : '';
+
+        tr.innerHTML = `
+          <td style="text-align: center;">
+            <span class="cwa-live-dot" style="${isActive ? 'background: #00f2fe; box-shadow: 0 0 8px #00f2fe;' : 'background: #64748b; opacity: 0.4;'}"></span>
+          </td>
+          <td>
+            <strong style="color: #ffffff;">${storm.cwaName}</strong>
+            <span style="font-family: var(--font-mono); color: var(--color-primary); font-size: 11px; margin-left: 4px;">${storm.intlName}</span>
+            <div style="font-size: 10px; color: var(--text-dim); font-family: var(--font-mono);">${storm.cwaNo}</div>
+          </td>
+          <td style="font-family: var(--font-mono); font-weight: 600;">${storm.year}</td>
+          <td><span class="cwa-intensity-pill ${storm.intensityLevel}">${storm.intensity}</span></td>
+          <td><span class="cwa-route-pill">第 ${storm.routeId} 類</span></td>
+          <td style="font-family: var(--font-mono); font-weight: 700; color: var(--color-primary);">${storm.pressure} hPa</td>
+          <td style="font-family: var(--font-mono); font-weight: 700; color: #f87171;">${storm.maxWind} m/s</td>
+          <td style="font-family: var(--font-mono);">${storm.radius7kt} km</td>
+          <td style="max-width: 280px; font-size: 11px; color: var(--text-muted); line-height: 1.4;">
+            <span style="color: #ffffff; font-weight: 600;">${storm.landfallLocation}</span>：${storm.tags.slice(0, 2).join(' ')}
+          </td>
+          <td style="text-align: center;">
+            <button class="btn-table-apply" onclick="applyCwaTyphoonData('${storm.id}')">
+              ${isActive ? '✓ 使用中' : '動態讀取'}
+            </button>
+          </td>
+        `;
+
+        tr.addEventListener('click', (e) => {
+          if (!e.target.closest('.btn-table-apply')) {
+            applyCwaTyphoonData(storm.id);
+          }
+        });
+
+        cwaTableBody.appendChild(tr);
+      });
+    }
+
+    // 重設所有 CWA 篩選條件
+    function resetAllCwaFilters() {
+      cwaSearchQuery = '';
+      cwaFilterYear = 'all';
+      cwaFilterRoute = 'all';
+      cwaFilterIntensity = 'all';
+
+      if (cwaSearchInput) cwaSearchInput.value = '';
+      if (btnCwaClearSearch) btnCwaClearSearch.style.display = 'none';
+      if (cwaFilterYearEl) cwaFilterYearEl.value = 'all';
+      if (cwaFilterRouteEl) cwaFilterRouteEl.value = 'all';
+      if (cwaFilterIntensityEl) cwaFilterIntensityEl.value = 'all';
+
+      audioEngine.playSnap();
+      renderCwaCatalog();
+    }
+
+    // 填充左側面板快速下拉選單
+    function populateCwaQuickDropdown() {
+      if (!cwaQuickDropdown) return;
+      cwaQuickDropdown.innerHTML = '<option value="" disabled selected>⚡ 動態讀取歷年侵台颱風 (31筆一覽)...</option>';
+
+      // 依年份降冪排序
+      const sorted = Object.values(CWA_TYPHOON_DATABASE).sort((a, b) => b.year - a.year);
+      sorted.forEach(storm => {
+        const opt = document.createElement('option');
+        opt.value = storm.id;
+        opt.textContent = `${storm.year} ${storm.cwaName} (${storm.intlName}) - ${storm.intensity} [第${storm.routeId}類]`;
+        cwaQuickDropdown.appendChild(opt);
+      });
+
+      cwaQuickDropdown.addEventListener('change', () => {
+        if (cwaQuickDropdown.value) {
+          audioEngine.playSnap();
+          applyCwaTyphoonData(cwaQuickDropdown.value);
+        }
       });
     }
 
@@ -5219,8 +6713,14 @@
       }
     }
 
-    // 將特定 CWA 颱風數據注入並更新整個工作台
-    function applyCwaTyphoonData(stormId) {
+    // 將特定 CWA 颱風數據動態讀取並注入至工作台
+    function applyCwaTyphoonData(stormId, customData) {
+      if (customData) {
+        CWA_TYPHOON_DATABASE[customData.id] = customData;
+        stormId = customData.id;
+        populateCwaQuickDropdown();
+      }
+
       const storm = CWA_TYPHOON_DATABASE[stormId];
       if (!storm) return;
 
@@ -5230,7 +6730,7 @@
       if (stormNameEl) stormNameEl.innerHTML = `${storm.cwaName} (${storm.intlName}) <span class="unit">${storm.intensity}</span>`;
       if (telemetryPressureEl) telemetryPressureEl.innerHTML = `${storm.pressure} <span class="unit">hPa</span>`;
       if (telemetryWindEl) telemetryWindEl.innerHTML = `${storm.maxWind} <span class="unit">m/s (${getBeaufortScale(storm.maxWind)}級)</span>`;
-      if (telemetryRainEl) telemetryRainEl.innerHTML = `${storm.rainExtreme.toLocaleString()} <span class="unit">mm/24h</span>`;
+      if (telemetryRainEl) telemetryRainEl.innerHTML = `${storm.rainExtreme ? storm.rainExtreme.toLocaleString() : '800'} <span class="unit">mm/24h</span>`;
       if (telemetryMotionEl) telemetryMotionEl.innerHTML = `${storm.motionSpeed} <span class="unit">km/h ${storm.motionDir}</span>`;
 
       // 2. 更新 SVG 暴風圈半徑 (以真實公里數換算：1km ≒ 0.72 px)
@@ -5280,23 +6780,29 @@
         switchPrinciple(storm.principle);
       }
 
-      // 7. 更新左側快捷選單高亮狀態
+      // 7. 更新左側快捷選單高亮與下拉選單值
       document.querySelectorAll('.cwa-quick-chip').forEach(chip => {
         chip.classList.toggle('active', chip.getAttribute('data-cwa-id') === stormId);
       });
+      if (cwaQuickDropdown) {
+        cwaQuickDropdown.value = stormId;
+      }
 
-      // 8. 更新 Modal 內部卡片選取狀態
-      renderCwaCards();
+      // 8. 重新計算當前時間點的颱風物理位置
+      updateSimulation(progress / 100);
+
+      // 9. 更新 Modal 內部選取狀態
+      renderCwaCatalog();
       updateCwaJsonDisplay();
 
-      // 9. 更新 SVG 截圖晶片標籤
+      // 10. 更新 SVG 截圖晶片標籤
       if (ssChipStorm) {
         ssChipStorm.textContent = `${storm.cwaName} (${storm.intlName})`;
       }
 
-      // 10. 音訊與 Toast 回饋
+      // 11. 音訊與 Toast 回饋
       audioEngine.playChord();
-      showHudToast('📡 中央氣象署觀測數據已套用！', `${storm.year}年 ${storm.cwaName} (${storm.intlName}) 官方實測數據已即時注入工作台`);
+      showHudToast('📡 氣象署颱風數據動態讀取成功！', `${storm.year}年 ${storm.cwaName} (${storm.intlName}) 中心氣壓 ${storm.pressure}hPa / 風速 ${storm.maxWind}m/s 已套用`);
     }
 
     // 快捷列切換函式
@@ -5308,7 +6814,7 @@
     // 開啟 CWA 視窗
     function openCwaModal() {
       audioEngine.playSnap();
-      renderCwaCards();
+      renderCwaCatalog();
       updateCwaJsonDisplay();
       cwaModalBackdrop.classList.add('active');
       btnCwaData?.classList.add('active');
@@ -5330,19 +6836,73 @@
       if (e.target === cwaModalBackdrop) closeCwaModal();
     });
 
+    // 搜尋與篩選事件監聽
+    cwaSearchInput?.addEventListener('input', (e) => {
+      cwaSearchQuery = e.target.value;
+      if (btnCwaClearSearch) btnCwaClearSearch.style.display = cwaSearchQuery ? 'block' : 'none';
+      renderCwaCatalog();
+    });
+
+    btnCwaClearSearch?.addEventListener('click', () => {
+      cwaSearchQuery = '';
+      if (cwaSearchInput) cwaSearchInput.value = '';
+      btnCwaClearSearch.style.display = 'none';
+      renderCwaCatalog();
+      audioEngine.playClick();
+    });
+
+    cwaFilterYearEl?.addEventListener('change', (e) => {
+      cwaFilterYear = e.target.value;
+      audioEngine.playClick();
+      renderCwaCatalog();
+    });
+
+    cwaFilterRouteEl?.addEventListener('change', (e) => {
+      cwaFilterRoute = e.target.value;
+      audioEngine.playClick();
+      renderCwaCatalog();
+    });
+
+    cwaFilterIntensityEl?.addEventListener('change', (e) => {
+      cwaFilterIntensity = e.target.value;
+      audioEngine.playClick();
+      renderCwaCatalog();
+    });
+
+    btnResetFilters?.addEventListener('click', resetAllCwaFilters);
+
+    btnViewCards?.addEventListener('click', () => {
+      cwaViewMode = 'cards';
+      btnViewCards.classList.add('active');
+      btnViewTable.classList.remove('active');
+      audioEngine.playClick();
+      renderCwaCatalog();
+    });
+
+    btnViewTable?.addEventListener('click', () => {
+      cwaViewMode = 'table';
+      btnViewTable.classList.add('active');
+      btnViewCards.classList.remove('active');
+      audioEngine.playClick();
+      renderCwaCatalog();
+    });
+
     // CWA Modal 分頁標籤切換
     document.querySelectorAll('.cwa-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         const target = tab.getAttribute('data-tab');
+        if (!target) return;
         document.querySelectorAll('.cwa-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
 
-        const tabArchive = document.getElementById('tabContentArchive');
+        const tabCatalog = document.getElementById('tabContentCatalog');
         const tabLive = document.getElementById('tabContentLive');
+        const tabCustom = document.getElementById('tabContentCustom');
         const tabJson = document.getElementById('tabContentJson');
 
-        if (tabArchive) tabArchive.style.display = target === 'archive' ? 'block' : 'none';
+        if (tabCatalog) tabCatalog.style.display = target === 'catalog' ? 'block' : 'none';
         if (tabLive) tabLive.style.display = target === 'live' ? 'block' : 'none';
+        if (tabCustom) tabCustom.style.display = target === 'custom' ? 'block' : 'none';
         if (tabJson) tabJson.style.display = target === 'json' ? 'block' : 'none';
 
         audioEngine.playClick();
@@ -5356,6 +6916,118 @@
         audioEngine.playSnap();
         showHudToast('📋 JSON 數據已複製', '已將中央氣象署格式結構化數據複製到剪貼簿');
       });
+    });
+
+    // 自訂/外部颱風動態讀入
+    btnApplyCustomTyphoon?.addEventListener('click', () => {
+      audioEngine.playSnap();
+      let customData = null;
+
+      // 檢查是否貼上了 JSON
+      const rawJson = customJsonInput?.value.trim();
+      if (rawJson) {
+        try {
+          const parsed = JSON.parse(rawJson);
+          customData = {
+            id: 'custom_' + Date.now(),
+            cwaName: parsed.typhoonNameZh || parsed.cwaName || '自訂',
+            intlName: parsed.typhoonNameEn || parsed.intlName || 'CUSTOM',
+            year: parsed.year || new Date().getFullYear(),
+            cwaNo: parsed.cwaNo || 'CUSTOM-01',
+            intensity: parsed.peakIntensity || parsed.intensity || '中度颱風',
+            intensityLevel: 'moderate',
+            routeId: parsed.officialRouteCategory || parsed.routeId || 2,
+            pressure: parsed.observationData?.centerPressure_hPa || parsed.pressure || 940,
+            maxWind: parsed.observationData?.maxWindSpeed_ms || parsed.maxWind || 45,
+            gustWind: parsed.observationData?.gustWindSpeed_ms || parsed.gustWind || 55,
+            radius7kt: parsed.observationData?.radiusOf7ktWind_km || parsed.radius7kt || 240,
+            radius10kt: parsed.observationData?.radiusOf10ktWind_km || parsed.radius10kt || 80,
+            rainExtreme: parsed.observationData?.rainfallExtreme_mm || parsed.rainExtreme || 800,
+            motionSpeed: parsed.observationData?.motionSpeed_kmh || parsed.motionSpeed || 18,
+            motionDir: parsed.observationData?.motionDirection || parsed.motionDir || '西北',
+            landfallLocation: parsed.observationData?.landfallLocation || parsed.landfallLocation || '宜蘭',
+            landfallTime: parsed.observationData?.landfallTime || parsed.landfallTime || '即時動態',
+            tags: ["#自訂動態載入", "#外部JSON資料", "#即時模擬"],
+            summary: "使用者透過動態外部資料載入器匯入之颱風觀測實測紀錄。",
+            threats: parsed.regionalImpactEvaluation || { yilan: 85, east: 80, taipei: 80, south: 75, central: 60 },
+            principle: "orographic",
+            pathD: "M 830,420 C 680,350 510,240 380,200 C 290,170 190,170 120,160",
+            points: [{ t: 0, x: 830, y: 420 }, { t: 50, x: 510, y: 240 }, { t: 100, x: 190, y: 170 }]
+          };
+        } catch (err) {
+          showHudToast('❌ JSON 解析失敗', '請確認貼上的 JSON 格式是否完整');
+          return;
+        }
+      } else {
+        const nameZh = customNameZh?.value.trim() || '自訂颱風';
+        const nameEn = customNameEn?.value.trim() || 'CUSTOM';
+        const press = parseInt(customPressure?.value) || 930;
+        const wind = parseInt(customMaxWind?.value) || 48;
+        const r7 = parseInt(customRadius7kt?.value) || 250;
+        const rId = parseInt(customRouteId?.value) || 2;
+
+        let level = 'moderate';
+        let intName = '中度颱風';
+        if (wind >= 51) { level = 'strong'; intName = '強烈颱風'; }
+        else if (wind < 32.7) { level = 'mild'; intName = '輕度颱風'; }
+
+        customData = {
+          id: 'custom_' + Date.now(),
+          cwaName: nameZh,
+          intlName: nameEn,
+          year: new Date().getFullYear(),
+          cwaNo: 'CUSTOM-DATA',
+          intensity: intName,
+          intensityLevel: level,
+          routeId: rId,
+          pressure: press,
+          maxWind: wind,
+          gustWind: Math.round(wind * 1.25),
+          radius7kt: r7,
+          radius10kt: Math.round(r7 * 0.4),
+          rainExtreme: 950,
+          motionSpeed: 19,
+          motionDir: "西北西",
+          landfallLocation: "自訂登陸點",
+          landfallTime: new Date().toLocaleDateString('zh-TW'),
+          tags: ["#動態自訂颱風", "#即時數值模擬", `#第${rId}類路徑`],
+          summary: `使用者自訂參數之動態熱帶氣旋：中心最低氣壓 ${press} hPa，近中心最大風速 ${wind} m/s，暴風半徑 ${r7} 公里。`,
+          threats: { yilan: 80, east: 80, taipei: 80, south: 80, central: 60 },
+          principle: "orographic",
+          pathD: "M 830,420 C 680,350 510,240 380,200 C 290,170 190,170 120,160",
+          points: [{ t: 0, x: 830, y: 420 }, { t: 50, x: 510, y: 240 }, { t: 100, x: 190, y: 170 }]
+        };
+      }
+
+      applyCwaTyphoonData(customData.id, customData);
+      closeCwaModal();
+      showHudToast('⚡ 自訂颱風已動態讀入！', `${customData.cwaName} (${customData.intlName}) 已即刻渲染至 3D 向量工作台`);
+    });
+
+    // 演練示範：動態載入在途強颱警報模擬
+    btnSimulateLiveAlert?.addEventListener('click', () => {
+      audioEngine.playSnap();
+      const mockLiveStorm = {
+        cwaName: '凱米',
+        intlName: 'GAEMI (即時警報演練)',
+        pressure: 935,
+        maxWind: 51,
+        radius7kt: 250,
+        radius10kt: 90
+      };
+      latestLiveCwaData = mockLiveStorm;
+
+      cwaLiveHeaderTitle.innerHTML = `<span style="color:#ef4444">⚠️ [演練模式] 偵測到中央氣象署發布中警報：凱米 (GAEMI)</span>`;
+      cwaLiveFeedbackMsg.innerHTML = `
+        <strong>警報等級：</strong>海上陸上颱風警報 第 16 報<br>
+        <strong>中心最低氣壓：</strong>935 hPa<br>
+        <strong>近中心最大風速：</strong>51 m/s (16 級)<br>
+        <strong>七級風暴風半徑：</strong>250 km<br>
+        <strong>警戒區域：</strong>宜蘭、花蓮、新北、桃園、高雄、屏東等全部陸上警戒區。
+      `;
+      if (cwaLiveActiveAction) cwaLiveActiveAction.style.display = 'block';
+      audioEngine.playChord();
+      showHudToast('💡 演練警報已動態加載', '點擊「一鍵將此即時警報數據套用至工作台」即可直接驅動模擬');
     });
 
     // 即時連線 CWA 開放資料 API (W-C0034-001)
@@ -5401,7 +7073,7 @@
           cwaLiveHeaderTitle.innerHTML = `<span>🌤️ 目前西北太平洋無中央氣象署發布之颱風警報 (Safe)</span>`;
           cwaLiveFeedbackMsg.innerHTML = `
             氣象署回傳狀態代碼 <strong>Success (200 OK)</strong>。目前台灣周遭洋面無正在發布海上陸上警報之熱帶氣旋。<br>
-            系統已為您維護並同步 <strong>2024 凱米、山陀兒、康芮、2023 海葵</strong> 等歷年完整實測紀錄，請點擊上方「官方精選歷史強颱」分頁隨選即測。
+            系統已為您維護並同步 <strong>31 款歷年完整侵台最佳路徑實測紀錄</strong>，請切換至「歷年侵台最佳追蹤資料庫」分頁隨選即測，或點擊「演練示範」按鈕測試即時警報動態加載。
           `;
           if (cwaLiveActiveAction) cwaLiveActiveAction.style.display = 'none';
           audioEngine.playClick();
@@ -5411,7 +7083,7 @@
         cwaLiveHeaderTitle.innerHTML = `<span>🟢 連線驗證成功 (模擬展示安全環境)</span>`;
         cwaLiveFeedbackMsg.innerHTML = `
           已成功與中央氣象署開放資料平臺建立數據握手（端點：<code>W-C0034-001</code>）。<br>
-          目前洋面平靜無在途颱風警報，已自動加載官方 2024 最新登陸實測全套參數（凱米 935hPa / 山陀兒 910hPa / 康芮 320km 巨無霸暴風圈）。
+          目前洋面平靜無在途颱風警報，已同步加載官方 31 款指標性侵台颱風全套實測參數。
         `;
         if (cwaLiveActiveAction) cwaLiveActiveAction.style.display = 'none';
         audioEngine.playSnap();
@@ -5445,7 +7117,7 @@
 
     // 全域鍵盤快捷鍵：按 S 截圖，按 ESC 關閉 Modal
     window.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
       if (e.key === 's' || e.key === 'S') {
         e.preventDefault();
         btnScreenshot.click();
@@ -5494,7 +7166,8 @@
     }
 
     // 初始化啟動
-    renderCwaCards();
+    renderCwaCatalog();
+    populateCwaQuickDropdown();
     updateCwaJsonDisplay();
     updateSimulation(progress / 100);
   </script>
